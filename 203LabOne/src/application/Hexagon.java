@@ -1,12 +1,7 @@
 package application;
 
-import java.io.Serializable;
+public class Hexagon{
 
-public class Hexagon implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6320590345528710462L;
 	private int hexagonLabel;
 	private String sideOne;
 	private String sideTwo;
@@ -14,6 +9,9 @@ public class Hexagon implements Serializable {
 	private String sideFour;
 	private String sideFive;
 	private String sideSix;
+	private int sidesConnected = 0;
+	private boolean connected = false;
+	private int positon;
 
 	public Hexagon() {
 	}
@@ -30,6 +28,29 @@ public class Hexagon implements Serializable {
 		sideSix = sideSixIn;
 	}
 
+	public int getPositon() {
+		return positon;
+	}
+	
+	public void setPositon(int positon) {
+		this.positon = positon;
+	}
+	
+	public boolean isConnected() {
+		return connected;
+	}
+	
+	public void setConnected(boolean connected) {
+		this.connected = connected;
+	}
+	
+	public int getSidesConnected() {
+		return sidesConnected;
+	}
+	
+	public void setSidesConnected(int sidesConnected) {
+		this.sidesConnected = sidesConnected;
+	}
 
 	public int getHexagonLabel() {
 		return hexagonLabel;

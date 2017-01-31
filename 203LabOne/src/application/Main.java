@@ -12,12 +12,13 @@ public class Main {
 
 	private String lineOfData;
 	private String[] field;
-	private List<Hexagon> hexagons = new ArrayList<Hexagon>();
+	public List<Hexagon> hexagons = new ArrayList<Hexagon>();
 
 	public void monitor() {
 		String[] options = { "Quit", "Solve", "Grab Colors From File", "Print hexagon colors" };
 
 		int selection;
+		RecursiveSolver rs = new RecursiveSolver();
 
 		do {
 
@@ -26,7 +27,8 @@ public class Main {
 
 			switch (selection) {
 			case 1:
-				JOptionPane.showMessageDialog(null, "Not Yet Implemented");
+				rs.solver(hexagons);
+//				JOptionPane.showMessageDialog(null, "Not Yet Implemented");
 				break;
 			case 2:
 				try {
