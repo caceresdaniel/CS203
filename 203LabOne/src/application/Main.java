@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 public class Main {
 
-	private String lineOfData;
-	private String[] field;
 	public List<Hexagon> hexagons = new ArrayList<Hexagon>();
 
 	public void monitor() {
@@ -27,8 +25,9 @@ public class Main {
 
 			switch (selection) {
 			case 1:
+				//rs.matchChecker(hexagons, 2, 1);
 				rs.solver(hexagons);
-//				JOptionPane.showMessageDialog(null, "Not Yet Implemented");
+				// JOptionPane.showMessageDialog(null, "Not Yet Implemented");
 				break;
 			case 2:
 				try {
@@ -46,6 +45,7 @@ public class Main {
 	}
 
 	private void grabFromFile() throws IOException {
+		String[] field;
 
 		JFileChooser fc = new JFileChooser();
 		int val = fc.showOpenDialog(null);
@@ -57,6 +57,7 @@ public class Main {
 			while (fReader.hasNextLine()) {
 
 				String noSpaces;
+				String lineOfData;
 
 				lineOfData = fReader.nextLine();
 				noSpaces = spaceRemover(lineOfData);
@@ -71,7 +72,6 @@ public class Main {
 	}
 
 	private String spaceRemover(String lineOfData) {
-
 		String noSpaces = "";
 
 		for (int i = 0; i < lineOfData.length(); i++) {
