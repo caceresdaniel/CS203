@@ -13,7 +13,7 @@ public class Hexagon{
 	private String sideSix;
 	private int sidesConnected = 0;
 	private boolean connected = false;
-	private int positon;
+	//private int position;
 	private ArrayList<Integer> usedIn = new ArrayList<Integer>();
 
 	public Hexagon() {
@@ -43,13 +43,13 @@ public class Hexagon{
 		sideSix = sideSixIn;
 	}
 	
-	public int getPositon() {
-		return positon;
-	}
-	
-	public void setPositon(int positon) {
-		this.positon = positon;
-	}
+//	public int getPosition() {
+//		return position;
+//	}
+//	
+//	public void setPosition(int position) {
+//		this.position = position;
+//	}
 	
 	public boolean isConnected() {
 		return connected;
@@ -124,7 +124,7 @@ public class Hexagon{
 	}
 
 	public String toString() {
-		return "Hexagon #: " + hexagonLabel + " ,with colors in order from segment 1 to segment 6 " + sideOne + ", "
+		return "Hexagon #: " + hexagonLabel + ", with colors in order from segment 1 to segment 6 " + sideOne + ", "
 				+ sideTwo + ", " + sideThree + ", " + sideFour + ", " + sideFive + ", " + sideSix;
 	}
 }

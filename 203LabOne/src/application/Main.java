@@ -25,6 +25,7 @@ public class Main {
 
 			switch (selection) {
 			case 1:
+				insertZero();
 				rs.solver(hexagons);
 				break;
 			case 2:
@@ -63,6 +64,7 @@ public class Main {
 
 				hexagons.add(new Hexagon(Integer.parseInt(field[0]), field[1], field[2], field[3], field[4], field[5],
 						field[6]));
+				
 
 			}
 			fReader.close();
@@ -78,5 +80,11 @@ public class Main {
 		}
 
 		return noSpaces;
+	}
+	
+	public void insertZero(){
+		for(int i = 0; i < hexagons.size(); i++){
+			hexagons.get(i).getUsedIn().add(0);
+		}
 	}
 }
