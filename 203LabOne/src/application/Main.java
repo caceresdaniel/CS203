@@ -25,9 +25,7 @@ public class Main {
 
 			switch (selection) {
 			case 1:
-				//rs.matchChecker(hexagons, 2, 1);
 				rs.solver(hexagons);
-				// JOptionPane.showMessageDialog(null, "Not Yet Implemented");
 				break;
 			case 2:
 				try {

@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 public class Hexagon{
 
 	private int hexagonLabel;
@@ -12,8 +14,21 @@ public class Hexagon{
 	private int sidesConnected = 0;
 	private boolean connected = false;
 	private int positon;
+	private ArrayList<Integer> usedIn = new ArrayList<Integer>();
 
 	public Hexagon() {
+	}
+
+	public ArrayList<Integer> getUsedIn() {
+		return usedIn;
+	}
+	
+	public void addToList(int num){
+		usedIn.add(num);
+	}
+	
+	public void setUsedIn(ArrayList<Integer> usedIn) {
+		this.usedIn = usedIn;
 	}
 
 	public Hexagon(int hexagonLabelIn, String sideOneIn, String sideTwoIn, String sideThreeIn, String sideFourIn,
@@ -27,7 +42,7 @@ public class Hexagon{
 		sideFive = sideFiveIn;
 		sideSix = sideSixIn;
 	}
-
+	
 	public int getPositon() {
 		return positon;
 	}
