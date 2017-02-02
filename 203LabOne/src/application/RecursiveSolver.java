@@ -53,7 +53,10 @@ public class RecursiveSolver {
 	}
 
 	/*****************************************/
-	// connects them recursively if they match
+	//connects them recursively if they match
+	//works but doesn't work, need to fix this 
+	//once i fix this and make it so it calls it only once
+	//program will work....
 	public void matchChecker(List<Hexagon> hexagons, int currentHex, int position) {
 		Hexagon h = hexagons.get(0);
 		Hexagon ch = hexagons.get(currentHex);
@@ -117,7 +120,7 @@ public class RecursiveSolver {
 			} else if (rotations == 6) {
 				ch.getUsedIn().add(3);
 				System.out.println("no match");
-			//	solver(hexagons);
+				solver(hexagons);
 			} else if (rotations < 6 && !(p.isPosThree()) && !(noMatch)) {
 				rotator(hexagons, currentHex);
 				rotations++;
