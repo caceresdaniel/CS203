@@ -5,8 +5,9 @@ import java.util.stream.IntStream;
 
 public class RecursiveSolver {
 
+	public boolean contains = false;
 	public int rotations = 0;
-	public boolean noMatch = false;
+	public boolean noMatch = true;
 	public int currentHex = 0;
 	public int position;
 	PositionTracker p = new PositionTracker();
@@ -17,14 +18,12 @@ public class RecursiveSolver {
 	public void solver(List<Hexagon> hexagons) {
 
 		hexagons.get(0).setConnected(true);
-
 		positionChooser();
-
 		hexChooser(hexagons, position);
+		rotations = 0;
 
 		System.out.println("currently at position " + position + " using hex " + currentHex);
 		if (p.isAllFill()) {
-
 			System.out.println("Solved with hexagons: ");
 			for (int i = 0; i < hexagons.size(); i++) {
 				System.out.println(hexagons.get(i).toString());
@@ -32,6 +31,9 @@ public class RecursiveSolver {
 		} else {
 			matchChecker(hexagons, currentHex, position);
 		}
+		
+		
+
 	}
 
 	/********************************************/
@@ -53,17 +55,11 @@ public class RecursiveSolver {
 	}
 
 	/*****************************************/
-	//connects them recursively if they match
-	//works but doesn't work, need to fix this 
-	//once i fix this and make it so it calls it only once
-	//program will work....
+	// connects them recursively if they match
+	// if they dont match
 	public void matchChecker(List<Hexagon> hexagons, int currentHex, int position) {
 		Hexagon h = hexagons.get(0);
 		Hexagon ch = hexagons.get(currentHex);
-
-		if (rotations > 6) {
-			noMatch = true;
-		}
 
 		if (position == 1) {
 			if (h.getSideOne().equals(ch.getSideFour()) && !(p.isPosOne())) {
@@ -79,11 +75,6 @@ public class RecursiveSolver {
 				ch.getUsedIn().add(1);
 				System.out.println("not able to match");
 				solver(hexagons);
-			} else if (rotations < 6 && !(p.isPosOne()) && !(noMatch)) {
-				rotator(hexagons, currentHex);
-				rotations++;
-				System.out.println("did something in position " + position + " " + currentHex + " " + rotations);
-				matchChecker(hexagons, currentHex, position);
 			}
 		} else if (position == 2) {
 			if (h.getSideTwo().equals(ch.getSideFive())
@@ -100,11 +91,6 @@ public class RecursiveSolver {
 				ch.getUsedIn().add(2);
 				System.out.println("no match");
 				solver(hexagons);
-			} else if (rotations < 6 && !(p.isPosTwo()) && !(noMatch)) {
-				rotator(hexagons, currentHex);
-				rotations++;
-				System.out.println("did something in position " + position + " " + currentHex + " " + rotations);
-				matchChecker(hexagons, currentHex, position);
 			}
 		} else if (position == 3) {
 			if (h.getSideThree().equals(ch.getSideSix())
@@ -121,11 +107,6 @@ public class RecursiveSolver {
 				ch.getUsedIn().add(3);
 				System.out.println("no match");
 				solver(hexagons);
-			} else if (rotations < 6 && !(p.isPosThree()) && !(noMatch)) {
-				rotator(hexagons, currentHex);
-				rotations++;
-				System.out.println("did something in position " + position + " " + currentHex + " " + rotations);
-				matchChecker(hexagons, currentHex, position);
 			}
 		} else if (position == 4) {
 			if (h.getSideFour().equals(ch.getSideOne())
@@ -141,12 +122,7 @@ public class RecursiveSolver {
 			} else if (rotations == 6) {
 				ch.getUsedIn().add(4);
 				System.out.println("no match");
-			//	solver(hexagons);
-			} else if (rotations < 6 && !(p.isPosFour()) && !(noMatch)) {
-				rotator(hexagons, currentHex);
-				rotations++;
-				System.out.println("did something in position " + position + " " + currentHex + " " + rotations);
-				matchChecker(hexagons, currentHex, position);
+				solver(hexagons);
 			}
 		} else if (position == 5) {
 			if (h.getSideFive().equals(ch.getSideTwo())
@@ -162,12 +138,7 @@ public class RecursiveSolver {
 			} else if (rotations == 6) {
 				ch.getUsedIn().add(5);
 				System.out.println("no match");
-				//solver(hexagons);
-			} else if (rotations < 6 && !(p.isPosFive()) && !(noMatch)) {
-				rotator(hexagons, currentHex);
-				rotations++;
-				System.out.println("did something in position " + position + " " + currentHex + " " + rotations);
-				matchChecker(hexagons, currentHex, position);
+				solver(hexagons);
 			}
 		} else if (position == 6) {
 			if (h.getSideSix().equals(ch.getSideThree())
@@ -183,14 +154,16 @@ public class RecursiveSolver {
 				solver(hexagons);
 			} else if (rotations == 6) {
 				ch.getUsedIn().add(6);
-				System.out.println("no match");
-				//solver(hexagons);
-			} else if (rotations < 6 && !(p.isPosSix()) && !(noMatch)) {
-				rotator(hexagons, currentHex);
-				rotations++;
-				System.out.println("did something in position " + position + " " + currentHex + " " + rotations);
-				matchChecker(hexagons, currentHex, position);
+				noMatch = true;
+				System.out.println("No Solution!");
 			}
+		}
+		if (ch.isConnected() == false && rotations < 6) {
+			rotator(hexagons, currentHex);
+			rotations++;
+			System.out.println("did something in position " + position + " " + currentHex + " " + rotations);
+
+			matchChecker(hexagons, currentHex, position);
 		}
 	}
 
@@ -199,7 +172,6 @@ public class RecursiveSolver {
 	// position the
 	// program is currently solving at
 	public void hexChooser(List<Hexagon> hexagons, int position) {
-		boolean contains = false;
 
 		for (int j = 0; j < 7; j++) {
 			for (int k = 0; k < hexagons.get(j).getUsedIn().size(); k++) {
@@ -208,7 +180,7 @@ public class RecursiveSolver {
 			if (hexagons.get(j).isConnected() == false && contains == false) {
 				currentHex = j;
 				System.out.println(j);
-				break;
+
 			}
 		}
 		System.out.println(contains);

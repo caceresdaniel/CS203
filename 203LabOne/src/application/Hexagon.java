@@ -13,7 +13,7 @@ public class Hexagon{
 	private String sideSix;
 	private int sidesConnected = 0;
 	private boolean connected = false;
-	//private int position;
+	
 	private ArrayList<Integer> usedIn = new ArrayList<Integer>();
 
 	public Hexagon() {
@@ -42,14 +42,6 @@ public class Hexagon{
 		sideFive = sideFiveIn;
 		sideSix = sideSixIn;
 	}
-	
-//	public int getPosition() {
-//		return position;
-//	}
-//	
-//	public void setPosition(int position) {
-//		this.position = position;
-//	}
 	
 	public boolean isConnected() {
 		return connected;
