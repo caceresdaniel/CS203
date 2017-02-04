@@ -90,9 +90,9 @@ public class Main {
 
 		return noSpaces;
 	}
-	
+
 	/******************************************************************/
-	//inserting a zero to all objects to avoid crashes due to indicies
+	// inserting a zero to all objects to avoid crashes due to indicies
 	public void insertZero() {
 		for (int i = 0; i < hexagons.size(); i++) {
 			hexagons.get(i).getUsedIn().add(0);

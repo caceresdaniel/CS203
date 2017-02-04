@@ -1,0 +1,28 @@
+.mainPane{
+	-fx-pref-height: 600;
+	-fx-pref-width: 600;
+}
+
+.hbox{
+	-fx-pref-height: 600;
+	-fx-pref-width: 600;
+}
+
+.vbox{
+	-fx-alignment: center;
+}
+
+.button{
+	-fx-background-color: #FFFFFF;
+	-fx-alignment: center;
+}
+
+.title{
+	-fx-font-size: 250%;
+	-fx-text-fill: #FFFFFF;
+	-fx-background-color: #000000;
+	-fx-alignment: center;
+	-fx-max-width: 900;
+}
+
+
