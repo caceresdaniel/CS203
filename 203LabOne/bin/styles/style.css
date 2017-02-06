@@ -6,15 +6,19 @@
 .hbox{
 	-fx-pref-height: 600;
 	-fx-pref-width: 600;
+	-fx-background-color:#000000;
+	-fx-alignment:center;
 }
 
 .vbox{
 	-fx-alignment: center;
+	-fx-background-color:#000000;
 }
 
 .button{
-	-fx-background-color: #FFFFFF;
-	-fx-alignment: center;
+	-fx-background-color: #000000;
+	-fx-text-fill: #FFFFFF;
+	-fx-border-color: #FFFFFF;
 }
 
 .title{
@@ -24,5 +28,3 @@
 	-fx-alignment: center;
 	-fx-max-width: 900;
 }
-
-
