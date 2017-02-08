@@ -3,11 +3,11 @@
 	-fx-pref-width: 600;
 }
 
-.hbox{
+.pane{
 	-fx-pref-height: 600;
 	-fx-pref-width: 600;
 	-fx-background-color:#000000;
-	-fx-alignment:center;
+	
 }
 
 .vbox{
