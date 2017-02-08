@@ -1,13 +1,13 @@
 .mainPane{
-	-fx-pref-height: 600;
-	-fx-pref-width: 600;
+	-fx-pref-height: 800;
+	-fx-pref-width: 800;
 }
 
-.hbox{
-	-fx-pref-height: 600;
-	-fx-pref-width: 600;
+.pane{
+	-fx-pref-height: 800;
+	-fx-pref-width: 800;
 	-fx-background-color:#000000;
-	-fx-alignment:center;
+	
 }
 
 .vbox{

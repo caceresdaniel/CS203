@@ -3,6 +3,8 @@ package application;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import javax.swing.JOptionPane;
+
 public class RecursiveSolver {
 
 	public boolean contains = false;
@@ -10,6 +12,7 @@ public class RecursiveSolver {
 	public boolean noMatch = true;
 	public int currentHex = 0;
 	public int position;
+	GUI gui = new GUI();
 	PositionTracker p = new PositionTracker();
 
 	/****************************************************************************/
@@ -24,6 +27,7 @@ public class RecursiveSolver {
 
 		System.out.println("currently at position " + position + " using hex " + currentHex);
 		if (p.isAllFill()) {
+			gui.colorSetter(hexagons);
 			System.out.println("Solved with hexagons: ");
 			for (int i = 0; i < hexagons.size(); i++) {
 				System.out.println(hexagons.get(i).toString());
@@ -155,7 +159,7 @@ public class RecursiveSolver {
 			} else if (rotations == 6) {
 				ch.getUsedIn().add(6);
 				noMatch = true;
-				System.out.println("No Solution!");
+				JOptionPane.showMessageDialog(null, "No Solution!");
 			}
 		}
 		if (ch.isConnected() == false && rotations < 6) {
