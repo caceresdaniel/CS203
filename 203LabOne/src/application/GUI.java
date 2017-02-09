@@ -1,13 +1,10 @@
 package application;
 
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -15,8 +12,7 @@ import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
 public class GUI extends Application {
-	
-	Main main = new Main();
+
 	Pane triangles = new Pane();
 	Polygon polygon11 = new Polygon();
 	Polygon polygon12 = new Polygon();
@@ -61,14 +57,16 @@ public class GUI extends Application {
 	Polygon polygon75 = new Polygon();
 	Polygon polygon76 = new Polygon();
 
-	// Attempted to do it simply but could not figure it out in time
+	/**********************************************************************/
+	// Attempted to do it simply and efficiently but could not figure it out in
+	// time
 	// so I resorted to doing it the easiest and ugliest way.... I feel ashamed
 
+	// creates the main scene and calls the methods to create/color/and add the
+	// triangles
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			
-			RecursiveSolver rs = new RecursiveSolver();
 			primaryStage.setTitle("Lab 1");
 			Pane pane = new Pane();
 
@@ -77,35 +75,20 @@ public class GUI extends Application {
 			Scene sc = new Scene(pane);
 			sc.getStylesheets().add("styles/style.css");
 
-			Label title = new Label("Hexagon Solution");
+			Label title = new Label("Hexagon Puzzle Solution");
 			title.getStyleClass().add("title");
 
-			Button butt = new Button("Launch");
-			butt.getStyleClass().add("button");
-
-			Button butt2 = new Button("Show Hexagons");
-			butt2.getStyleClass().add("button");
-			
 			VBox vb = new VBox();
 			vb.getStyleClass().add("vbox");
 
 			triangles.getStyleClass().add("pane");
 
 			disgustingCode();
-			colorSetter(main.hexagons, rs.p);
-			System.out.println(main.hexagons.toString());
-			
-			HBox buttons = new HBox();
-			buttons.getStyleClass().add("buttons");
+			colorSetter(RecursiveSolver.hexagons, RecursiveSolver.p);
+			addShapes();
 
-			buttons.getChildren().addAll(butt, butt2);
+			vb.getChildren().addAll(title, triangles);
 
-			vb.getChildren().addAll(buttons, title, triangles);
-
-			launchButton(butt, pane);
-			
-			hexButton(butt2, pane);
-			
 			pane.getChildren().add(vb);
 
 			primaryStage.setScene(sc);
@@ -116,618 +99,11 @@ public class GUI extends Application {
 		}
 	}
 
-	public void launchButton(Button butt, Pane pane) {
-		butt.setOnMouseClicked(e -> {
-			main.monitor();
-
-		});
-	}
-	
-	public void hexButton(Button butt2, Pane pane){
-		butt2.setOnMouseClicked(e->{
-			System.out.println("ran");
-			addShapes();
-			
-		});
-	}
-
-	public void addShapes(){
-		triangles.getChildren().addAll(polygon11, polygon12, polygon13, polygon14, polygon15, polygon16);
-		triangles.getChildren().addAll(polygon21, polygon22, polygon23, polygon24, polygon25, polygon26);
-		triangles.getChildren().addAll(polygon31, polygon32, polygon33, polygon34, polygon35, polygon36);
-		triangles.getChildren().addAll(polygon41, polygon42, polygon43, polygon44, polygon45, polygon46);
-		triangles.getChildren().addAll(polygon51, polygon52, polygon53, polygon54, polygon55, polygon56);
-		triangles.getChildren().addAll(polygon61, polygon62, polygon63, polygon64, polygon65, polygon66);
-		triangles.getChildren().addAll(polygon71, polygon72, polygon73, polygon74, polygon75, polygon76);
-	}
-	
-	public void colorSetter(List<Hexagon> hexagons, PositionTracker p) {
-		String color1 = "P", color2 = "Y", color3 = "O", color4 = "R", color5 = "B", color6 = "G";
-		Color yellow = Color.YELLOW, blue = Color.BLUE, green = Color.GREEN, orange = Color.ORANGE,
-				purple = Color.PURPLE, red = Color.RED;
-
-		System.out.println("did something for colors");
-
-		for (int j = 0; j < hexagons.size(); j++) {
-			if (hexagons.get(j).getHexagonLabel() == p.getInPosOne()) {
-				for (int i = 0; i < hexagons.size(); i++) {
-					if (hexagons.get(i).getSideOne().equals(color1)) {
-						polygon21.setFill(purple);
-						System.out.println("did it");
-					} else if (hexagons.get(i).getSideOne().equals(color2)) {
-						polygon21.setFill(yellow);
-					} else if (hexagons.get(i).getSideOne().equals(color3)) {
-						polygon21.setFill(orange);
-					} else if (hexagons.get(i).getSideOne().equals(color4)) {
-						polygon21.setFill(red);
-					} else if (hexagons.get(i).getSideOne().equals(color5)) {
-						polygon21.setFill(blue);
-					} else if (hexagons.get(i).getSideOne().equals(color6)) {
-						polygon21.setFill(green);
-					}
-					if (hexagons.get(i).getSideTwo().equals(color1)) {
-						polygon22.setFill(purple);
-					} else if (hexagons.get(i).getSideTwo().equals(color2)) {
-						polygon22.setFill(yellow);
-					} else if (hexagons.get(i).getSideTwo().equals(color3)) {
-						polygon22.setFill(orange);
-					} else if (hexagons.get(i).getSideTwo().equals(color4)) {
-						polygon22.setFill(red);
-					} else if (hexagons.get(i).getSideTwo().equals(color5)) {
-						polygon22.setFill(blue);
-					} else if (hexagons.get(i).getSideTwo().equals(color6)) {
-						polygon22.setFill(green);
-					}
-					if (hexagons.get(i).getSideThree().equals(color1)) {
-						polygon23.setFill(purple);
-					} else if (hexagons.get(i).getSideThree().equals(color2)) {
-						polygon23.setFill(yellow);
-					} else if (hexagons.get(i).getSideThree().equals(color3)) {
-						polygon23.setFill(orange);
-					} else if (hexagons.get(i).getSideThree().equals(color4)) {
-						polygon23.setFill(red);
-					} else if (hexagons.get(i).getSideThree().equals(color5)) {
-						polygon23.setFill(blue);
-					} else if (hexagons.get(i).getSideThree().equals(color6)) {
-						polygon23.setFill(green);
-					}
-					if (hexagons.get(i).getSideFour().equals(color1)) {
-						polygon24.setFill(purple);
-					} else if (hexagons.get(i).getSideFour().equals(color2)) {
-						polygon24.setFill(yellow);
-					} else if (hexagons.get(i).getSideFour().equals(color3)) {
-						polygon24.setFill(orange);
-					} else if (hexagons.get(i).getSideFour().equals(color4)) {
-						polygon24.setFill(red);
-					} else if (hexagons.get(i).getSideFour().equals(color5)) {
-						polygon24.setFill(blue);
-					} else if (hexagons.get(i).getSideFour().equals(color6)) {
-						polygon24.setFill(green);
-					}
-					if (hexagons.get(i).getSideFive().equals(color1)) {
-						polygon25.setFill(purple);
-					} else if (hexagons.get(i).getSideFive().equals(color2)) {
-						polygon25.setFill(yellow);
-					} else if (hexagons.get(i).getSideFive().equals(color3)) {
-						polygon25.setFill(orange);
-					} else if (hexagons.get(i).getSideFive().equals(color4)) {
-						polygon25.setFill(red);
-					} else if (hexagons.get(i).getSideFive().equals(color5)) {
-						polygon25.setFill(blue);
-					} else if (hexagons.get(i).getSideFive().equals(color6)) {
-						polygon25.setFill(green);
-					}
-					if (hexagons.get(i).getSideSix().equals(color1)) {
-						polygon26.setFill(purple);
-					} else if (hexagons.get(i).getSideSix().equals(color2)) {
-						polygon26.setFill(yellow);
-					} else if (hexagons.get(i).getSideSix().equals(color3)) {
-						polygon26.setFill(orange);
-					} else if (hexagons.get(i).getSideSix().equals(color4)) {
-						polygon26.setFill(red);
-					} else if (hexagons.get(i).getSideSix().equals(color5)) {
-						polygon26.setFill(blue);
-					} else if (hexagons.get(i).getSideSix().equals(color6)) {
-						polygon26.setFill(green);
-					}
-				}
-
-			} else if (hexagons.get(j).getHexagonLabel() == p.getInPosTwo()) {
-				for (int i = 0; i < hexagons.size(); i++) {
-					if (hexagons.get(i).getSideOne().equals(color1)) {
-						polygon31.setFill(purple);
-					} else if (hexagons.get(i).getSideOne().equals(color2)) {
-						polygon31.setFill(yellow);
-					} else if (hexagons.get(i).getSideOne().equals(color3)) {
-						polygon31.setFill(orange);
-					} else if (hexagons.get(i).getSideOne().equals(color4)) {
-						polygon31.setFill(red);
-					} else if (hexagons.get(i).getSideOne().equals(color5)) {
-						polygon31.setFill(blue);
-					} else if (hexagons.get(i).getSideOne().equals(color6)) {
-						polygon31.setFill(green);
-					}
-					if (hexagons.get(i).getSideTwo().equals(color1)) {
-						polygon32.setFill(purple);
-					} else if (hexagons.get(i).getSideTwo().equals(color2)) {
-						polygon32.setFill(yellow);
-					} else if (hexagons.get(i).getSideTwo().equals(color3)) {
-						polygon32.setFill(orange);
-					} else if (hexagons.get(i).getSideTwo().equals(color4)) {
-						polygon32.setFill(red);
-					} else if (hexagons.get(i).getSideTwo().equals(color5)) {
-						polygon32.setFill(blue);
-					} else if (hexagons.get(i).getSideTwo().equals(color6)) {
-						polygon32.setFill(green);
-					}
-					if (hexagons.get(i).getSideThree().equals(color1)) {
-						polygon33.setFill(purple);
-					} else if (hexagons.get(i).getSideThree().equals(color2)) {
-						polygon33.setFill(yellow);
-					} else if (hexagons.get(i).getSideThree().equals(color3)) {
-						polygon33.setFill(orange);
-					} else if (hexagons.get(i).getSideThree().equals(color4)) {
-						polygon33.setFill(red);
-					} else if (hexagons.get(i).getSideThree().equals(color5)) {
-						polygon33.setFill(blue);
-					} else if (hexagons.get(i).getSideThree().equals(color6)) {
-						polygon33.setFill(green);
-					}
-					if (hexagons.get(i).getSideFour().equals(color1)) {
-						polygon34.setFill(purple);
-					} else if (hexagons.get(i).getSideFour().equals(color2)) {
-						polygon34.setFill(yellow);
-					} else if (hexagons.get(i).getSideFour().equals(color3)) {
-						polygon34.setFill(orange);
-					} else if (hexagons.get(i).getSideFour().equals(color4)) {
-						polygon34.setFill(red);
-					} else if (hexagons.get(i).getSideFour().equals(color5)) {
-						polygon34.setFill(blue);
-					} else if (hexagons.get(i).getSideFour().equals(color6)) {
-						polygon34.setFill(green);
-					}
-					if (hexagons.get(i).getSideFive().equals(color1)) {
-						polygon35.setFill(purple);
-					} else if (hexagons.get(i).getSideFive().equals(color2)) {
-						polygon35.setFill(yellow);
-					} else if (hexagons.get(i).getSideFive().equals(color3)) {
-						polygon35.setFill(orange);
-					} else if (hexagons.get(i).getSideFive().equals(color4)) {
-						polygon35.setFill(red);
-					} else if (hexagons.get(i).getSideFive().equals(color5)) {
-						polygon35.setFill(blue);
-					} else if (hexagons.get(i).getSideFive().equals(color6)) {
-						polygon35.setFill(green);
-					}
-					if (hexagons.get(i).getSideSix().equals(color1)) {
-						polygon36.setFill(purple);
-					} else if (hexagons.get(i).getSideSix().equals(color2)) {
-						polygon36.setFill(yellow);
-					} else if (hexagons.get(i).getSideSix().equals(color3)) {
-						polygon36.setFill(orange);
-					} else if (hexagons.get(i).getSideSix().equals(color4)) {
-						polygon36.setFill(red);
-					} else if (hexagons.get(i).getSideSix().equals(color5)) {
-						polygon36.setFill(blue);
-					} else if (hexagons.get(i).getSideSix().equals(color6)) {
-						polygon36.setFill(green);
-					}
-				}
-			} else if (hexagons.get(j).getHexagonLabel() == p.getInPosThree()) {
-				for (int i = 0; i < hexagons.size(); i++) {
-					if (hexagons.get(i).getSideOne().equals(color1)) {
-						polygon41.setFill(purple);
-					} else if (hexagons.get(i).getSideOne().equals(color2)) {
-						polygon41.setFill(yellow);
-					} else if (hexagons.get(i).getSideOne().equals(color3)) {
-						polygon41.setFill(orange);
-					} else if (hexagons.get(i).getSideOne().equals(color4)) {
-						polygon41.setFill(red);
-					} else if (hexagons.get(i).getSideOne().equals(color5)) {
-						polygon41.setFill(blue);
-					} else if (hexagons.get(i).getSideOne().equals(color6)) {
-						polygon41.setFill(green);
-					}
-					if (hexagons.get(i).getSideTwo().equals(color1)) {
-						polygon42.setFill(purple);
-					} else if (hexagons.get(i).getSideTwo().equals(color2)) {
-						polygon42.setFill(yellow);
-					} else if (hexagons.get(i).getSideTwo().equals(color3)) {
-						polygon42.setFill(orange);
-					} else if (hexagons.get(i).getSideTwo().equals(color4)) {
-						polygon42.setFill(red);
-					} else if (hexagons.get(i).getSideTwo().equals(color5)) {
-						polygon42.setFill(blue);
-					} else if (hexagons.get(i).getSideTwo().equals(color6)) {
-						polygon42.setFill(green);
-					}
-					if (hexagons.get(i).getSideThree().equals(color1)) {
-						polygon43.setFill(purple);
-					} else if (hexagons.get(i).getSideThree().equals(color2)) {
-						polygon43.setFill(yellow);
-					} else if (hexagons.get(i).getSideThree().equals(color3)) {
-						polygon43.setFill(orange);
-					} else if (hexagons.get(i).getSideThree().equals(color4)) {
-						polygon43.setFill(red);
-					} else if (hexagons.get(i).getSideThree().equals(color5)) {
-						polygon43.setFill(blue);
-					} else if (hexagons.get(i).getSideThree().equals(color6)) {
-						polygon43.setFill(green);
-					}
-					if (hexagons.get(i).getSideFour().equals(color1)) {
-						polygon44.setFill(purple);
-					} else if (hexagons.get(i).getSideFour().equals(color2)) {
-						polygon44.setFill(yellow);
-					} else if (hexagons.get(i).getSideFour().equals(color3)) {
-						polygon44.setFill(orange);
-					} else if (hexagons.get(i).getSideFour().equals(color4)) {
-						polygon44.setFill(red);
-					} else if (hexagons.get(i).getSideFour().equals(color5)) {
-						polygon44.setFill(blue);
-					} else if (hexagons.get(i).getSideFour().equals(color6)) {
-						polygon44.setFill(green);
-					}
-					if (hexagons.get(i).getSideFive().equals(color1)) {
-						polygon45.setFill(purple);
-					} else if (hexagons.get(i).getSideFive().equals(color2)) {
-						polygon45.setFill(yellow);
-					} else if (hexagons.get(i).getSideFive().equals(color3)) {
-						polygon45.setFill(orange);
-					} else if (hexagons.get(i).getSideFive().equals(color4)) {
-						polygon45.setFill(red);
-					} else if (hexagons.get(i).getSideFive().equals(color5)) {
-						polygon45.setFill(blue);
-					} else if (hexagons.get(i).getSideFive().equals(color6)) {
-						polygon45.setFill(green);
-					}
-					if (hexagons.get(i).getSideSix().equals(color1)) {
-						polygon46.setFill(purple);
-					} else if (hexagons.get(i).getSideSix().equals(color2)) {
-						polygon46.setFill(yellow);
-					} else if (hexagons.get(i).getSideSix().equals(color3)) {
-						polygon46.setFill(orange);
-					} else if (hexagons.get(i).getSideSix().equals(color4)) {
-						polygon46.setFill(red);
-					} else if (hexagons.get(i).getSideSix().equals(color5)) {
-						polygon46.setFill(blue);
-					} else if (hexagons.get(i).getSideSix().equals(color6)) {
-						polygon46.setFill(green);
-					}
-				}
-			} else if (hexagons.get(j).getHexagonLabel() == p.getInPosFour()) {
-				for (int i = 0; i < hexagons.size(); i++) {
-					if (hexagons.get(i).getSideOne().equals(color1)) {
-						polygon51.setFill(purple);
-					} else if (hexagons.get(i).getSideOne().equals(color2)) {
-						polygon51.setFill(yellow);
-					} else if (hexagons.get(i).getSideOne().equals(color3)) {
-						polygon51.setFill(orange);
-					} else if (hexagons.get(i).getSideOne().equals(color4)) {
-						polygon51.setFill(red);
-					} else if (hexagons.get(i).getSideOne().equals(color5)) {
-						polygon51.setFill(blue);
-					} else if (hexagons.get(i).getSideOne().equals(color6)) {
-						polygon51.setFill(green);
-					}
-					if (hexagons.get(i).getSideTwo().equals(color1)) {
-						polygon52.setFill(purple);
-					} else if (hexagons.get(i).getSideTwo().equals(color2)) {
-						polygon52.setFill(yellow);
-					} else if (hexagons.get(i).getSideTwo().equals(color3)) {
-						polygon52.setFill(orange);
-					} else if (hexagons.get(i).getSideTwo().equals(color4)) {
-						polygon52.setFill(red);
-					} else if (hexagons.get(i).getSideTwo().equals(color5)) {
-						polygon52.setFill(blue);
-					} else if (hexagons.get(i).getSideTwo().equals(color6)) {
-						polygon52.setFill(green);
-					}
-					if (hexagons.get(i).getSideThree().equals(color1)) {
-						polygon53.setFill(purple);
-					} else if (hexagons.get(i).getSideThree().equals(color2)) {
-						polygon53.setFill(yellow);
-					} else if (hexagons.get(i).getSideThree().equals(color3)) {
-						polygon53.setFill(orange);
-					} else if (hexagons.get(i).getSideThree().equals(color4)) {
-						polygon53.setFill(red);
-					} else if (hexagons.get(i).getSideThree().equals(color5)) {
-						polygon53.setFill(blue);
-					} else if (hexagons.get(i).getSideThree().equals(color6)) {
-						polygon53.setFill(green);
-					}
-					if (hexagons.get(i).getSideFour().equals(color1)) {
-						polygon54.setFill(purple);
-					} else if (hexagons.get(i).getSideFour().equals(color2)) {
-						polygon54.setFill(yellow);
-					} else if (hexagons.get(i).getSideFour().equals(color3)) {
-						polygon54.setFill(orange);
-					} else if (hexagons.get(i).getSideFour().equals(color4)) {
-						polygon54.setFill(red);
-					} else if (hexagons.get(i).getSideFour().equals(color5)) {
-						polygon54.setFill(blue);
-					} else if (hexagons.get(i).getSideFour().equals(color6)) {
-						polygon54.setFill(green);
-					}
-					if (hexagons.get(i).getSideFive().equals(color1)) {
-						polygon55.setFill(purple);
-					} else if (hexagons.get(i).getSideFive().equals(color2)) {
-						polygon55.setFill(yellow);
-					} else if (hexagons.get(i).getSideFive().equals(color3)) {
-						polygon55.setFill(orange);
-					} else if (hexagons.get(i).getSideFive().equals(color4)) {
-						polygon55.setFill(red);
-					} else if (hexagons.get(i).getSideFive().equals(color5)) {
-						polygon55.setFill(blue);
-					} else if (hexagons.get(i).getSideFive().equals(color6)) {
-						polygon55.setFill(green);
-					}
-					if (hexagons.get(i).getSideSix().equals(color1)) {
-						polygon56.setFill(purple);
-					} else if (hexagons.get(i).getSideSix().equals(color2)) {
-						polygon56.setFill(yellow);
-					} else if (hexagons.get(i).getSideSix().equals(color3)) {
-						polygon56.setFill(orange);
-					} else if (hexagons.get(i).getSideSix().equals(color4)) {
-						polygon56.setFill(red);
-					} else if (hexagons.get(i).getSideSix().equals(color5)) {
-						polygon56.setFill(blue);
-					} else if (hexagons.get(i).getSideSix().equals(color6)) {
-						polygon56.setFill(green);
-					}
-				}
-			} else if (hexagons.get(j).getHexagonLabel() == p.getInPosFive()) {
-
-				for (int i = 0; i < hexagons.size(); i++) {
-					if (hexagons.get(i).getSideOne().equals(color1)) {
-						polygon61.setFill(purple);
-					} else if (hexagons.get(i).getSideOne().equals(color2)) {
-						polygon61.setFill(yellow);
-					} else if (hexagons.get(i).getSideOne().equals(color3)) {
-						polygon61.setFill(orange);
-					} else if (hexagons.get(i).getSideOne().equals(color4)) {
-						polygon61.setFill(red);
-					} else if (hexagons.get(i).getSideOne().equals(color5)) {
-						polygon61.setFill(blue);
-					} else if (hexagons.get(i).getSideOne().equals(color6)) {
-						polygon61.setFill(green);
-					}
-					if (hexagons.get(i).getSideTwo().equals(color1)) {
-						polygon62.setFill(purple);
-					} else if (hexagons.get(i).getSideTwo().equals(color2)) {
-						polygon62.setFill(yellow);
-					} else if (hexagons.get(i).getSideTwo().equals(color3)) {
-						polygon62.setFill(orange);
-					} else if (hexagons.get(i).getSideTwo().equals(color4)) {
-						polygon62.setFill(red);
-					} else if (hexagons.get(i).getSideTwo().equals(color5)) {
-						polygon62.setFill(blue);
-					} else if (hexagons.get(i).getSideTwo().equals(color6)) {
-						polygon62.setFill(green);
-					}
-					if (hexagons.get(i).getSideThree().equals(color1)) {
-						polygon63.setFill(purple);
-					} else if (hexagons.get(i).getSideThree().equals(color2)) {
-						polygon63.setFill(yellow);
-					} else if (hexagons.get(i).getSideThree().equals(color3)) {
-						polygon63.setFill(orange);
-					} else if (hexagons.get(i).getSideThree().equals(color4)) {
-						polygon63.setFill(red);
-					} else if (hexagons.get(i).getSideThree().equals(color5)) {
-						polygon63.setFill(blue);
-					} else if (hexagons.get(i).getSideThree().equals(color6)) {
-						polygon63.setFill(green);
-					}
-					if (hexagons.get(i).getSideFour().equals(color1)) {
-						polygon64.setFill(purple);
-					} else if (hexagons.get(i).getSideFour().equals(color2)) {
-						polygon64.setFill(yellow);
-					} else if (hexagons.get(i).getSideFour().equals(color3)) {
-						polygon64.setFill(orange);
-					} else if (hexagons.get(i).getSideFour().equals(color4)) {
-						polygon64.setFill(red);
-					} else if (hexagons.get(i).getSideFour().equals(color5)) {
-						polygon64.setFill(blue);
-					} else if (hexagons.get(i).getSideFour().equals(color6)) {
-						polygon64.setFill(green);
-					}
-					if (hexagons.get(i).getSideFive().equals(color1)) {
-						polygon65.setFill(purple);
-					} else if (hexagons.get(i).getSideFive().equals(color2)) {
-						polygon65.setFill(yellow);
-					} else if (hexagons.get(i).getSideFive().equals(color3)) {
-						polygon65.setFill(orange);
-					} else if (hexagons.get(i).getSideFive().equals(color4)) {
-						polygon65.setFill(red);
-					} else if (hexagons.get(i).getSideFive().equals(color5)) {
-						polygon65.setFill(blue);
-					} else if (hexagons.get(i).getSideFive().equals(color6)) {
-						polygon65.setFill(green);
-					}
-					if (hexagons.get(i).getSideSix().equals(color1)) {
-						polygon66.setFill(purple);
-					} else if (hexagons.get(i).getSideSix().equals(color2)) {
-						polygon66.setFill(yellow);
-					} else if (hexagons.get(i).getSideSix().equals(color3)) {
-						polygon66.setFill(orange);
-					} else if (hexagons.get(i).getSideSix().equals(color4)) {
-						polygon66.setFill(red);
-					} else if (hexagons.get(i).getSideSix().equals(color5)) {
-						polygon66.setFill(blue);
-					} else if (hexagons.get(i).getSideSix().equals(color6)) {
-						polygon66.setFill(green);
-					}
-				}
-			} else if (hexagons.get(j).getHexagonLabel() == p.getInPosSix()) {
-
-				for (int i = 0; i < hexagons.size(); i++) {
-					if (hexagons.get(i).getSideOne().equals(color1)) {
-						polygon71.setFill(purple);
-					} else if (hexagons.get(i).getSideOne().equals(color2)) {
-						polygon71.setFill(yellow);
-					} else if (hexagons.get(i).getSideOne().equals(color3)) {
-						polygon71.setFill(orange);
-					} else if (hexagons.get(i).getSideOne().equals(color4)) {
-						polygon71.setFill(red);
-					} else if (hexagons.get(i).getSideOne().equals(color5)) {
-						polygon71.setFill(blue);
-					} else if (hexagons.get(i).getSideOne().equals(color6)) {
-						polygon71.setFill(green);
-					}
-					if (hexagons.get(i).getSideTwo().equals(color1)) {
-						polygon72.setFill(purple);
-					} else if (hexagons.get(i).getSideTwo().equals(color2)) {
-						polygon72.setFill(yellow);
-					} else if (hexagons.get(i).getSideTwo().equals(color3)) {
-						polygon72.setFill(orange);
-					} else if (hexagons.get(i).getSideTwo().equals(color4)) {
-						polygon72.setFill(red);
-					} else if (hexagons.get(i).getSideTwo().equals(color5)) {
-						polygon72.setFill(blue);
-					} else if (hexagons.get(i).getSideTwo().equals(color6)) {
-						polygon72.setFill(green);
-					}
-					if (hexagons.get(i).getSideThree().equals(color1)) {
-						polygon73.setFill(purple);
-					} else if (hexagons.get(i).getSideThree().equals(color2)) {
-						polygon73.setFill(yellow);
-					} else if (hexagons.get(i).getSideThree().equals(color3)) {
-						polygon73.setFill(orange);
-					} else if (hexagons.get(i).getSideThree().equals(color4)) {
-						polygon73.setFill(red);
-					} else if (hexagons.get(i).getSideThree().equals(color5)) {
-						polygon73.setFill(blue);
-					} else if (hexagons.get(i).getSideThree().equals(color6)) {
-						polygon73.setFill(green);
-					}
-					if (hexagons.get(i).getSideFour().equals(color1)) {
-						polygon74.setFill(purple);
-					} else if (hexagons.get(i).getSideFour().equals(color2)) {
-						polygon74.setFill(yellow);
-					} else if (hexagons.get(i).getSideFour().equals(color3)) {
-						polygon74.setFill(orange);
-					} else if (hexagons.get(i).getSideFour().equals(color4)) {
-						polygon74.setFill(red);
-					} else if (hexagons.get(i).getSideFour().equals(color5)) {
-						polygon74.setFill(blue);
-					} else if (hexagons.get(i).getSideFour().equals(color6)) {
-						polygon74.setFill(green);
-					}
-					if (hexagons.get(i).getSideFive().equals(color1)) {
-						polygon75.setFill(purple);
-					} else if (hexagons.get(i).getSideFive().equals(color2)) {
-						polygon75.setFill(yellow);
-					} else if (hexagons.get(i).getSideFive().equals(color3)) {
-						polygon75.setFill(orange);
-					} else if (hexagons.get(i).getSideFive().equals(color4)) {
-						polygon75.setFill(red);
-					} else if (hexagons.get(i).getSideFive().equals(color5)) {
-						polygon75.setFill(blue);
-					} else if (hexagons.get(i).getSideFive().equals(color6)) {
-						polygon75.setFill(green);
-					}
-					if (hexagons.get(i).getSideSix().equals(color1)) {
-						polygon76.setFill(purple);
-					} else if (hexagons.get(i).getSideSix().equals(color2)) {
-						polygon76.setFill(yellow);
-					} else if (hexagons.get(i).getSideSix().equals(color3)) {
-						polygon76.setFill(orange);
-					} else if (hexagons.get(i).getSideSix().equals(color4)) {
-						polygon76.setFill(red);
-					} else if (hexagons.get(i).getSideSix().equals(color5)) {
-						polygon76.setFill(blue);
-					} else if (hexagons.get(i).getSideSix().equals(color6)) {
-						polygon76.setFill(green);
-					}
-				}
-			} else if(hexagons.get(j).getHexagonLabel() == p.getInPosSeven()){
-				for (int i = 0; i < hexagons.size(); i++) {
-					if (hexagons.get(i).getSideOne().equals(color1)) {
-						polygon11.setFill(purple);
-					} else if (hexagons.get(i).getSideOne().equals(color2)) {
-						polygon11.setFill(yellow);
-					} else if (hexagons.get(i).getSideOne().equals(color3)) {
-						polygon11.setFill(orange);
-					} else if (hexagons.get(i).getSideOne().equals(color4)) {
-						polygon11.setFill(red);
-					} else if (hexagons.get(i).getSideOne().equals(color5)) {
-						polygon11.setFill(blue);
-					} else if (hexagons.get(i).getSideOne().equals(color6)) {
-						polygon11.setFill(green);
-					}
-
-					if (hexagons.get(i).getSideTwo().equals(color1)) {
-						polygon12.setFill(purple);
-					} else if (hexagons.get(i).getSideTwo().equals(color2)) {
-						polygon12.setFill(yellow);
-					} else if (hexagons.get(i).getSideTwo().equals(color3)) {
-						polygon12.setFill(orange);
-					} else if (hexagons.get(i).getSideTwo().equals(color4)) {
-						polygon12.setFill(red);
-					} else if (hexagons.get(i).getSideTwo().equals(color5)) {
-						polygon12.setFill(blue);
-					} else if (hexagons.get(i).getSideTwo().equals(color6)) {
-						polygon12.setFill(green);
-					}
-
-					if (hexagons.get(i).getSideThree().equals(color1)) {
-						polygon13.setFill(purple);
-					} else if (hexagons.get(i).getSideThree().equals(color2)) {
-						polygon13.setFill(yellow);
-					} else if (hexagons.get(i).getSideThree().equals(color3)) {
-						polygon13.setFill(orange);
-					} else if (hexagons.get(i).getSideThree().equals(color4)) {
-						polygon13.setFill(red);
-					} else if (hexagons.get(i).getSideThree().equals(color5)) {
-						polygon13.setFill(blue);
-					} else if (hexagons.get(i).getSideThree().equals(color6)) {
-						polygon13.setFill(green);
-					}
-					if (hexagons.get(i).getSideFour().equals(color1)) {
-						polygon14.setFill(purple);
-					} else if (hexagons.get(i).getSideFour().equals(color2)) {
-						polygon14.setFill(yellow);
-					} else if (hexagons.get(i).getSideFour().equals(color3)) {
-						polygon14.setFill(orange);
-					} else if (hexagons.get(i).getSideFour().equals(color4)) {
-						polygon14.setFill(red);
-					} else if (hexagons.get(i).getSideFour().equals(color5)) {
-						polygon14.setFill(blue);
-					} else if (hexagons.get(i).getSideFour().equals(color6)) {
-						polygon14.setFill(green);
-					}
-					if (hexagons.get(i).getSideFive().equals(color1)) {
-						polygon15.setFill(purple);
-					} else if (hexagons.get(i).getSideFive().equals(color2)) {
-						polygon15.setFill(yellow);
-					} else if (hexagons.get(i).getSideFive().equals(color3)) {
-						polygon15.setFill(orange);
-					} else if (hexagons.get(i).getSideFive().equals(color4)) {
-						polygon15.setFill(red);
-					} else if (hexagons.get(i).getSideFive().equals(color5)) {
-						polygon15.setFill(blue);
-					} else if (hexagons.get(i).getSideFive().equals(color6)) {
-						polygon15.setFill(green);
-					}
-					if (hexagons.get(i).getSideSix().equals(color1)) {
-						polygon16.setFill(purple);
-					} else if (hexagons.get(i).getSideSix().equals(color2)) {
-						polygon16.setFill(yellow);
-					} else if (hexagons.get(i).getSideSix().equals(color3)) {
-						polygon16.setFill(orange);
-					} else if (hexagons.get(i).getSideSix().equals(color4)) {
-						polygon16.setFill(red);
-					} else if (hexagons.get(i).getSideSix().equals(color5)) {
-						polygon16.setFill(blue);
-					} else if (hexagons.get(i).getSideSix().equals(color6)) {
-						polygon16.setFill(green);
-					}
-				}
-			}
-		}
-		
-		System.out.println("reached the end");
-	}
-
+	/**********************************************/
+	// Method that creates a list for each triangle
+	// sets the color of the border to white and then
+	// populates the list with 3 different (x,y) pairs
+	// to form a triangle around a set center
 	public void disgustingCode() {
 		/**********************************/
 		// Hexagon 1
@@ -1251,8 +627,606 @@ public class GUI extends Application {
 
 	}
 
+	/*********************************************************/
+	// This method finds the position that a certain hexagon
+	// corresponds too and then colors the triangles in accordance
+	// to how the hexagon is colord
+	public void colorSetter(List<Hexagon> hexagons, PositionTracker p) {
+		String color1 = "P", color2 = "Y", color3 = "O", color4 = "R", color5 = "B", color6 = "G";
+		Color yellow = Color.YELLOW, blue = Color.BLUE, green = Color.GREEN, orange = Color.ORANGE,
+				purple = Color.PURPLE, red = Color.RED;
+
+		for (int i = 0; i < RecursiveSolver.hexagons.size(); i++) {
+			/******************************************************************************************/
+			// Position 1
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) - 1 == RecursiveSolver.p.getInPosOne()) {
+				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
+					polygon21.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color2)) {
+					polygon21.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color3)) {
+					polygon21.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color4)) {
+					polygon21.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color5)) {
+					polygon21.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color6)) {
+					polygon21.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color1)) {
+					polygon22.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color2)) {
+					polygon22.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color3)) {
+					polygon22.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color4)) {
+					polygon22.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color5)) {
+					polygon22.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color6)) {
+					polygon22.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color1)) {
+					polygon23.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color2)) {
+					polygon23.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color3)) {
+					polygon23.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color4)) {
+					polygon23.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color5)) {
+					polygon23.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color6)) {
+					polygon23.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color1)) {
+					polygon24.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color2)) {
+					polygon24.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color3)) {
+					polygon24.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color4)) {
+					polygon24.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color5)) {
+					polygon24.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color6)) {
+					polygon24.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color1)) {
+					polygon25.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color2)) {
+					polygon25.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color3)) {
+					polygon25.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color4)) {
+					polygon25.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color5)) {
+					polygon25.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color6)) {
+					polygon25.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color1)) {
+					polygon26.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color2)) {
+					polygon26.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color3)) {
+					polygon26.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color4)) {
+					polygon26.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color5)) {
+					polygon26.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color6)) {
+					polygon26.setFill(green);
+				}
+			}
+			/******************************************************************************************/
+			// Position 2
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) - 1 == RecursiveSolver.p.getInPosTwo()) {
+				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
+					polygon31.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color2)) {
+					polygon31.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color3)) {
+					polygon31.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color4)) {
+					polygon31.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color5)) {
+					polygon31.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color6)) {
+					polygon31.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color1)) {
+					polygon32.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color2)) {
+					polygon32.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color3)) {
+					polygon32.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color4)) {
+					polygon32.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color5)) {
+					polygon32.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color6)) {
+					polygon32.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color1)) {
+					polygon33.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color2)) {
+					polygon33.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color3)) {
+					polygon33.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color4)) {
+					polygon33.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color5)) {
+					polygon33.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color6)) {
+					polygon33.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color1)) {
+					polygon34.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color2)) {
+					polygon34.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color3)) {
+					polygon34.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color4)) {
+					polygon34.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color5)) {
+					polygon34.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color6)) {
+					polygon34.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color1)) {
+					polygon35.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color2)) {
+					polygon35.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color3)) {
+					polygon35.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color4)) {
+					polygon35.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color5)) {
+					polygon35.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color6)) {
+					polygon35.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color1)) {
+					polygon36.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color2)) {
+					polygon36.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color3)) {
+					polygon36.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color4)) {
+					polygon36.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color5)) {
+					polygon36.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color6)) {
+					polygon36.setFill(green);
+				}
+			}
+			/******************************************************************************************/
+			// Position 3
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) - 1 == RecursiveSolver.p.getInPosThree()) {
+				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
+					polygon41.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color2)) {
+					polygon41.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color3)) {
+					polygon41.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color4)) {
+					polygon41.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color5)) {
+					polygon41.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color6)) {
+					polygon41.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color1)) {
+					polygon42.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color2)) {
+					polygon42.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color3)) {
+					polygon42.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color4)) {
+					polygon42.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color5)) {
+					polygon42.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color6)) {
+					polygon42.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color1)) {
+					polygon43.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color2)) {
+					polygon43.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color3)) {
+					polygon43.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color4)) {
+					polygon43.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color5)) {
+					polygon43.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color6)) {
+					polygon43.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color1)) {
+					polygon44.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color2)) {
+					polygon44.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color3)) {
+					polygon44.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color4)) {
+					polygon44.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color5)) {
+					polygon44.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color6)) {
+					polygon44.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color1)) {
+					polygon45.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color2)) {
+					polygon45.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color3)) {
+					polygon45.setFill(orange);
+				} else if (hexagons.get(i).getSideFive().equals(color4)) {
+					polygon45.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color5)) {
+					polygon45.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color6)) {
+					polygon45.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color1)) {
+					polygon46.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color2)) {
+					polygon46.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color3)) {
+					polygon46.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color4)) {
+					polygon46.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color5)) {
+					polygon46.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color6)) {
+					polygon46.setFill(green);
+				}
+			}
+			/******************************************************************************************/
+			// Position 4
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) - 1 == RecursiveSolver.p.getInPosFour()) {
+				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
+					polygon51.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color2)) {
+					polygon51.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color3)) {
+					polygon51.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color4)) {
+					polygon51.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color5)) {
+					polygon51.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color6)) {
+					polygon51.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color1)) {
+					polygon52.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color2)) {
+					polygon52.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color3)) {
+					polygon52.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color4)) {
+					polygon52.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color5)) {
+					polygon52.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color6)) {
+					polygon52.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color1)) {
+					polygon53.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color2)) {
+					polygon53.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color3)) {
+					polygon53.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color4)) {
+					polygon53.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color5)) {
+					polygon53.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color6)) {
+					polygon53.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color1)) {
+					polygon54.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color2)) {
+					polygon54.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color3)) {
+					polygon54.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color4)) {
+					polygon54.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color5)) {
+					polygon54.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color6)) {
+					polygon54.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color1)) {
+					polygon55.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color2)) {
+					polygon55.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color3)) {
+					polygon55.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color4)) {
+					polygon55.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color5)) {
+					polygon55.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color6)) {
+					polygon55.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color1)) {
+					polygon56.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color2)) {
+					polygon56.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color3)) {
+					polygon56.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color4)) {
+					polygon56.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color5)) {
+					polygon56.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color6)) {
+					polygon56.setFill(green);
+				}
+			}
+			/******************************************************************************************/
+			// Position 5
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) - 1 == RecursiveSolver.p.getInPosFive()) {
+				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
+					polygon61.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color2)) {
+					polygon61.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color3)) {
+					polygon61.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color4)) {
+					polygon61.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color5)) {
+					polygon61.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color6)) {
+					polygon61.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color1)) {
+					polygon62.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color2)) {
+					polygon62.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color3)) {
+					polygon62.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color4)) {
+					polygon62.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color5)) {
+					polygon62.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color6)) {
+					polygon62.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color1)) {
+					polygon63.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color2)) {
+					polygon63.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color3)) {
+					polygon63.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color4)) {
+					polygon63.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color5)) {
+					polygon63.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color6)) {
+					polygon63.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color1)) {
+					polygon64.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color2)) {
+					polygon64.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color3)) {
+					polygon64.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color4)) {
+					polygon64.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color5)) {
+					polygon64.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color6)) {
+					polygon64.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color1)) {
+					polygon65.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color2)) {
+					polygon65.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color3)) {
+					polygon65.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color4)) {
+					polygon65.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color5)) {
+					polygon65.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color6)) {
+					polygon65.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color1)) {
+					polygon66.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color2)) {
+					polygon66.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color3)) {
+					polygon66.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color4)) {
+					polygon66.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color5)) {
+					polygon66.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color6)) {
+					polygon66.setFill(green);
+				}
+			}
+			/******************************************************************************************/
+			// Position 6
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) - 1 == RecursiveSolver.p.getInPosSix()) {
+				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
+					polygon71.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color2)) {
+					polygon71.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color3)) {
+					polygon71.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color4)) {
+					polygon71.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color5)) {
+					polygon71.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color6)) {
+					polygon71.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color1)) {
+					polygon72.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color2)) {
+					polygon72.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color3)) {
+					polygon72.setFill(orange);
+				} else if (hexagons.get(i).getSideTwo().equals(color4)) {
+					polygon72.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color5)) {
+					polygon72.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color6)) {
+					polygon72.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color1)) {
+					polygon73.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color2)) {
+					polygon73.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color3)) {
+					polygon73.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color4)) {
+					polygon73.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color5)) {
+					polygon73.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideThree().equals(color6)) {
+					polygon73.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color1)) {
+					polygon74.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color2)) {
+					polygon74.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color3)) {
+					polygon74.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color4)) {
+					polygon74.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color5)) {
+					polygon74.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFour().equals(color6)) {
+					polygon74.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color1)) {
+					polygon75.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color2)) {
+					polygon75.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color3)) {
+					polygon75.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color4)) {
+					polygon75.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color5)) {
+					polygon75.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideFive().equals(color6)) {
+					polygon75.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color1)) {
+					polygon76.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color2)) {
+					polygon76.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color3)) {
+					polygon76.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color4)) {
+					polygon76.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color5)) {
+					polygon76.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(i).getSideSix().equals(color6)) {
+					polygon76.setFill(green);
+				}
+			}
+			/******************************************************************************************/
+			// Position 0
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) == RecursiveSolver.p.getInPosZero()) {
+				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
+					polygon11.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(0).getSideOne().equals(color2)) {
+					polygon11.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(0).getSideOne().equals(color3)) {
+					polygon11.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(0).getSideOne().equals(color4)) {
+					polygon11.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(0).getSideOne().equals(color5)) {
+					polygon11.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(0).getSideOne().equals(color6)) {
+					polygon11.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(i).getSideTwo().equals(color1)) {
+					polygon12.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(0).getSideTwo().equals(color2)) {
+					polygon12.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(0).getSideTwo().equals(color3)) {
+					polygon12.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(0).getSideTwo().equals(color4)) {
+					polygon12.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(0).getSideTwo().equals(color5)) {
+					polygon12.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(0).getSideTwo().equals(color6)) {
+					polygon12.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(0).getSideThree().equals(color1)) {
+					polygon13.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(0).getSideThree().equals(color2)) {
+					polygon13.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(0).getSideThree().equals(color3)) {
+					polygon13.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(0).getSideThree().equals(color4)) {
+					polygon13.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(0).getSideThree().equals(color5)) {
+					polygon13.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(0).getSideThree().equals(color6)) {
+					polygon13.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(0).getSideFour().equals(color1)) {
+					polygon14.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFour().equals(color2)) {
+					polygon14.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFour().equals(color3)) {
+					polygon14.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFour().equals(color4)) {
+					polygon14.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFour().equals(color5)) {
+					polygon14.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFour().equals(color6)) {
+					polygon14.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(0).getSideFive().equals(color1)) {
+					polygon15.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFive().equals(color2)) {
+					polygon15.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFive().equals(color3)) {
+					polygon15.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFive().equals(color4)) {
+					polygon15.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFive().equals(color5)) {
+					polygon15.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(0).getSideFive().equals(color6)) {
+					polygon15.setFill(green);
+				}
+				if (RecursiveSolver.hexagons.get(0).getSideSix().equals(color1)) {
+					polygon16.setFill(purple);
+				} else if (RecursiveSolver.hexagons.get(0).getSideSix().equals(color2)) {
+					polygon16.setFill(yellow);
+				} else if (RecursiveSolver.hexagons.get(0).getSideSix().equals(color3)) {
+					polygon16.setFill(orange);
+				} else if (RecursiveSolver.hexagons.get(0).getSideSix().equals(color4)) {
+					polygon16.setFill(red);
+				} else if (RecursiveSolver.hexagons.get(0).getSideSix().equals(color5)) {
+					polygon16.setFill(blue);
+				} else if (RecursiveSolver.hexagons.get(0).getSideSix().equals(color6)) {
+					polygon16.setFill(green);
+				}
+			}
+		}
+	}
+
+	/***********************************************/
+	// Adds the triangles to the scene triangle pane
+	public void addShapes() {
+		triangles.getChildren().addAll(polygon11, polygon12, polygon13, polygon14, polygon15, polygon16);
+		triangles.getChildren().addAll(polygon21, polygon22, polygon23, polygon24, polygon25, polygon26);
+		triangles.getChildren().addAll(polygon31, polygon32, polygon33, polygon34, polygon35, polygon36);
+		triangles.getChildren().addAll(polygon41, polygon42, polygon43, polygon44, polygon45, polygon46);
+		triangles.getChildren().addAll(polygon51, polygon52, polygon53, polygon54, polygon55, polygon56);
+		triangles.getChildren().addAll(polygon61, polygon62, polygon63, polygon64, polygon65, polygon66);
+		triangles.getChildren().addAll(polygon71, polygon72, polygon73, polygon74, polygon75, polygon76);
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 }

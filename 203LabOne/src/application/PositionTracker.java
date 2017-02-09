@@ -9,24 +9,34 @@ public class PositionTracker {
 	private boolean posFour;
 	private boolean posFive;
 	private boolean posSix;
+	private boolean posZero;
 	private int inPosOne;
 	private int inPosTwo;
 	private int inPosThree;
 	private int inPosFour;
 	private int inPosFive;
 	private int inPosSix;
-	private int inPosSeven = 1;
-	
-	public PositionTracker(){}
+	private int inPosZero = 1;
 
-	public int getInPosSeven() {
-		return inPosSeven;
+	public PositionTracker() {
 	}
-	
-	public void setInPosSeven(int inPosSeven) {
-		this.inPosSeven = inPosSeven;
+
+	public boolean isPosZero() {
+		return posZero;
 	}
-	
+
+	public void setPosZero(boolean posZero) {
+		this.posZero = posZero;
+	}
+
+	public int getInPosZero() {
+		return inPosZero;
+	}
+
+	public void setInPosZero(int inPosZero) {
+		this.inPosZero = inPosZero;
+	}
+
 	public int getInPosOne() {
 		return inPosOne;
 	}
@@ -75,7 +85,6 @@ public class PositionTracker {
 		this.inPosSix = inPosSix;
 	}
 
-	
 	public boolean isPosOne() {
 		return posOne;
 	}

@@ -1,10 +1,8 @@
 package application;
 
 public class Driver {
-	
-	public static void main(String[] args){
-		Main pleaseRun = new Main();
+	public static void main(String[] args) {
+		RecursiveSolver pleaseRun = new RecursiveSolver();
 		pleaseRun.monitor();
 	}
-	
 }

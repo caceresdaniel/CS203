@@ -2,7 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
-public class Hexagon{
+public class Hexagon {
 
 	private int hexagonLabel;
 	private String sideOne;
@@ -11,9 +11,7 @@ public class Hexagon{
 	private String sideFour;
 	private String sideFive;
 	private String sideSix;
-	private int sidesConnected = 0;
 	private boolean connected = false;
-	
 	private ArrayList<Integer> usedIn = new ArrayList<Integer>();
 
 	public Hexagon() {
@@ -22,11 +20,11 @@ public class Hexagon{
 	public ArrayList<Integer> getUsedIn() {
 		return usedIn;
 	}
-	
-	public void addToList(int num){
+
+	public void addToList(int num) {
 		usedIn.add(num);
 	}
-	
+
 	public void setUsedIn(ArrayList<Integer> usedIn) {
 		this.usedIn = usedIn;
 	}
@@ -42,21 +40,13 @@ public class Hexagon{
 		sideFive = sideFiveIn;
 		sideSix = sideSixIn;
 	}
-	
+
 	public boolean isConnected() {
 		return connected;
 	}
-	
+
 	public void setConnected(boolean connected) {
 		this.connected = connected;
-	}
-	
-	public int getSidesConnected() {
-		return sidesConnected;
-	}
-	
-	public void setSidesConnected(int sidesConnected) {
-		this.sidesConnected = sidesConnected;
 	}
 
 	public int getHexagonLabel() {
