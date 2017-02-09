@@ -7,7 +7,7 @@
 	-fx-pref-height: 800;
 	-fx-pref-width: 800;
 	-fx-background-color:#000000;
-	
+	-fx-alignment:center;
 }
 
 .vbox{

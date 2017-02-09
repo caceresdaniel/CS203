@@ -5,6 +5,8 @@ import java.util.stream.IntStream;
 
 import javax.swing.JOptionPane;
 
+import javafx.application.Application;
+
 public class RecursiveSolver {
 
 	public boolean contains = false;
@@ -27,17 +29,17 @@ public class RecursiveSolver {
 
 		System.out.println("currently at position " + position + " using hex " + currentHex);
 		if (p.isAllFill()) {
-			gui.colorSetter(hexagons);
+
 			System.out.println("Solved with hexagons: ");
 			for (int i = 0; i < hexagons.size(); i++) {
 				System.out.println(hexagons.get(i).toString());
 			}
+			gui.addShapes();
+			Application.launch(GUI.class);
+			System.out.println("done");
 		} else {
 			matchChecker(hexagons, currentHex, position);
 		}
-		
-		
-
 	}
 
 	/********************************************/
