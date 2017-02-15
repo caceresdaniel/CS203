@@ -1,6 +1,9 @@
 package shapeyStuff;
 
-public class Sphere implements Shape {
+import java.io.Serializable;
+
+public class Sphere implements Shape, Serializable {
+	private static final long serialVersionUID = 3052069155291603479L;
 	private double radius;
 	
 	public Sphere (double radiusIn){

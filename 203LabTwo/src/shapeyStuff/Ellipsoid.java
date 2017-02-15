@@ -1,6 +1,9 @@
 package shapeyStuff;
 
-public class Ellipsoid implements Shape{
+import java.io.Serializable;
+
+public class Ellipsoid implements Shape, Serializable{
+	private static final long serialVersionUID = 2802215586728651627L;
 	private double radius1;
 	private double radius2;
 	private double radius3;

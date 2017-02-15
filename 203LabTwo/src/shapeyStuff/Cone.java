@@ -1,6 +1,9 @@
 package shapeyStuff;
 
-public class Cone implements Shape{
+import java.io.Serializable;
+
+public class Cone implements Shape, Serializable{
+	private static final long serialVersionUID = -6844218100979028433L;
 	private double height;
 	private double radius;
 	

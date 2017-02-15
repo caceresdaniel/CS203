@@ -1,23 +1,36 @@
 package shapeyStuff;
 
+import java.util.ArrayList;
+
 public class ShapeUtilities {
+	/*****************************************************************************/
 	/*
 	 * This method takes an ArrayList of Bounded Generic type and sorts it based
 	 * on the volumes of the objects using the following algorithm. The bound
 	 * should only allow any Shape object and subclasses. NOTE: You must follow
 	 * the algorithm exactly, do not deviate.
 	 */
-	public static <T> void recursiveSort() {
+	public static <T extends Shape> ArrayList<T> recursiveSort(ArrayList<T> sortedList) {
+		if( sortedList.size() <= 1){
+			return sortedList;
+		} 
+		
+		
+		
 		/*
-		 * if the list size is <= 1 return the list select a middle element from
-		 * the list and remove it create two lists leftList and rightList for
-		 * each element in the list if element is less than the middle element
-		 * then add element to the rightList else add element to leftList return
-		 * the combination of recursiveSort(leftList), middle element, and
-		 * recursiveSort(rightList)
+		 * if the list size is <= 1 
+		 * 		return the list
+		 * select a middle element from the list and remove it 
+		 * create two lists leftList and rightList
+		 * for each element in the list 
+		 *		if element is less than the middle element then add element to the rightList 
+		 * 		else add element to leftList 
+		 * return the combination of recursiveSort(leftList), middle element, and recursiveSort(rightList)
 		 */
+		
 	}
 
+	/***************************************************************************/
 	/*
 	 * This method takes an ArrayList of Bounded Generic Type which only allows
 	 * Shape objects and its subclasses. The method should return the object
@@ -27,10 +40,12 @@ public class ShapeUtilities {
 
 	}
 
+	/**************************************************************************/
 	/*
 	 * This method takes an ArrayList of Bounded Generic Type which only allows
 	 * Shape objects and its subclasses. The method should return the object
-	 * with the maximum volume from the list of objects.*/
+	 * with the maximum volume from the list of objects.
+	 */
 	public static <T> void max() {
 
 	}
