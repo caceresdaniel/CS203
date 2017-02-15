@@ -1,6 +1,6 @@
 package shapeyStuff;
 
-public class Ellipsoid implements Shape {
+public class Ellipsoid implements Shape{
 	private double radius1;
 	private double radius2;
 	private double radius3;
@@ -13,11 +13,11 @@ public class Ellipsoid implements Shape {
 
 	@Override
 	public double getVolume() {
-		// TODO Auto-generated method stub
-		return 0;
+		double volume = (4/3)* Math.PI * radius1 * radius2 * radius3;
+		return volume;
 	}
-	
+
 	public String toString(){
-		return "Elipsoid with 3 radii that are " + radius1 + ", " + radius2 + ", " + radius3 + " and volume of";
+		return "Ellipsoid with 3 radii: " + radius1 + ", " + radius2 + ", " + radius3 + "; and volume of " + getVolume() ;
 	}
 }
