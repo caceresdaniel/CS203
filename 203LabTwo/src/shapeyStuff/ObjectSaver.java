@@ -1,6 +1,5 @@
 package shapeyStuff;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,15 +45,24 @@ public class ObjectSaver<T> {
 	
 	public ArrayList<T> readAllObjects() {
 		ObjectInputStream in = null;
-		ArrayList<T> allObjects = null;
+		FileInputStream fin;
+		ArrayList<T> allObjects = new ArrayList<T>();
 
 		try {
-			in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
-			allObjects = (ArrayList<T>) in.readObject();
-			in.close();
+			fin = new FileInputStream(file);
+			in = new ObjectInputStream(fin);
+			allObjects.add((T) in.readObject());
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally{
+			try{
+				in.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		return allObjects;
 	}

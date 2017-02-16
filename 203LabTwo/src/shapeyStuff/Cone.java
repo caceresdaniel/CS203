@@ -3,7 +3,8 @@ package shapeyStuff;
 import java.io.Serializable;
 
 public class Cone implements Shape, Serializable{
-	private static final long serialVersionUID = -6844218100979028433L;
+
+	private static final long serialVersionUID = 1L;
 	private double height;
 	private double radius;
 	
@@ -14,7 +15,7 @@ public class Cone implements Shape, Serializable{
 	
 	@Override
 	public double getVolume() {
-		double volume = (1/3) * Math.PI * Math.pow(radius, 2) * height;
+		double volume = (1.0/3.0) * Math.PI * Math.pow(radius, 2) * height;
 		return volume;
 	}
 	
