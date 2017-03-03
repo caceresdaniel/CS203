@@ -8,7 +8,6 @@ public class LinkedList<T, K, O> {
 	private K category2Label;
 	private O category3Label;
 	private int groupingCategory;
-	
 
 	public LinkedList() {
 		this.head = null;
@@ -28,8 +27,8 @@ public class LinkedList<T, K, O> {
 	 * values in the File.
 	 */
 	public LinkedList(File file, int currentCategory) {
-		 this.groupingCategory = currentCategory;
-		 
+		this.groupingCategory = currentCategory;
+
 	}
 
 	/*
@@ -39,7 +38,7 @@ public class LinkedList<T, K, O> {
 	 * maintains the current grouping category of the list.
 	 */
 	public void add(T value1, K value2, O value3) {
-		
+
 	}
 
 	/* This method shall clear the list. */
@@ -55,16 +54,18 @@ public class LinkedList<T, K, O> {
 	 * list.
 	 */
 	public void deleteFirst() {
-		if(this.size == 0){
+		if (this.size == 0) {
 			System.out.println("Empty List");
 		} else {
-			T category1 = this.head.category1;
-			K category2 = this.head.category2;
-			O category3 = this.head.category3;
-			this.head = this.head.down;
-			this.size--;			
+			if (this.head.down != null) {
+				this.head.right.left = this.head.down;
+				this.head.right.right = this.head.right;
+				this.head = this.head.down;
+			} else {
+				this.head = this.head.right;
+			}
+			this.size--;
 		}
-		
 	}
 
 	/*
@@ -73,7 +74,24 @@ public class LinkedList<T, K, O> {
 	 * Nodes in the sublist should be "reattached" to the end of the main list.
 	 */
 	public void deleteLast() {
+		if (this.size == 0) {
+			System.out.println("Empty List");
+		} else {
+			Node<T, K, O> currentNode = this.head;
+			Node<T, K, O> previousNode = this.head;
+			do {
+				previousNode = currentNode;
+				currentNode = currentNode.right;
+			} while (currentNode.right != null);
 
+			if (currentNode.down != null) {
+				currentNode.down.left = previousNode;
+				previousNode.right = currentNode.down;
+			} else {
+				previousNode.right = null;
+			}
+			size--;
+		}
 	}
 
 	/*
