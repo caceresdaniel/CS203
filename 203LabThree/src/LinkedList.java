@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LinkedList<T, K, O> {
@@ -222,7 +223,7 @@ public class LinkedList<T, K, O> {
 		} else {
 			if (this.head.down != null) {
 				this.head.right.left = this.head.down;
-				this.head.right.right = this.head.right;
+				this.head.down.right = this.head.right;
 				this.head = this.head.down;
 			} else {
 				this.head = this.head.right;
@@ -242,10 +243,10 @@ public class LinkedList<T, K, O> {
 		} else {
 			Node<T, K, O> currentNode = this.head;
 			Node<T, K, O> previousNode = this.head;
-			do {
+			while (currentNode.right != null) {
 				previousNode = currentNode;
 				currentNode = currentNode.right;
-			} while (currentNode.right != null);
+			}
 
 			if (currentNode.down != null) {
 				currentNode.down.left = previousNode;
@@ -337,18 +338,18 @@ public class LinkedList<T, K, O> {
 		int count = 0;
 		Node<T, K, O> currentNode = this.head;
 		if (category == 1) {
-			while (currentNode.right != null && count < mainIndex ) {
+			while (currentNode.right != null && count < mainIndex) {
 				currentNode = currentNode.right;
 				count++;
 			}
 			return (String) currentNode.getCategory1();
-		} else 	if (category == 2) {
+		} else if (category == 2) {
 			while (currentNode.right != null && count < mainIndex) {
 				currentNode = currentNode.right;
 				count++;
 			}
 			return (String) currentNode.getCategory2();
-		}else 	if (category == 3) {
+		} else if (category == 3) {
 			while (currentNode.right != null && count < mainIndex) {
 				currentNode = currentNode.right;
 				count++;
@@ -381,6 +382,39 @@ public class LinkedList<T, K, O> {
 		} else if (subIndex < 0 | subIndex > size(mainIndex)) {
 			throw new IndexOutOfBoundsException("sub index out of bounds");
 		}
+		int countMain = 0, countSub = 0;
+		Node<T, K, O> currentNode = this.head;
+		if (category == 1) {
+			while (currentNode.right != null && countMain < mainIndex) {
+				currentNode = currentNode.right;
+				countMain++;
+			}
+			while (currentNode.down != null && countSub < subIndex) {
+				currentNode = currentNode.down;
+				countSub++;
+			}
+			return (String) currentNode.getCategory1();
+		} else if (category == 2) {
+			while (currentNode.right != null && countMain < mainIndex) {
+				currentNode = currentNode.right;
+				countMain++;
+			}
+			while (currentNode.down != null && countSub < subIndex) {
+				currentNode = currentNode.down;
+				countSub++;
+			}
+			return (String) currentNode.getCategory2();
+		} else if (category == 3) {
+			while (currentNode.right != null && countMain < mainIndex) {
+				currentNode = currentNode.right;
+				countMain++;
+			}
+			while (currentNode.down != null && countSub < subIndex) {
+				currentNode = currentNode.down;
+				countSub++;
+			}
+			return (String) currentNode.getCategory3();
+		}
 
 		return null;
 	}
@@ -394,13 +428,30 @@ public class LinkedList<T, K, O> {
 	 * bounds, display an IndexOutOfBoundsException with an appropriate error
 	 * message.
 	 */
-	public void regroup(int groupingCategoryNumber) throws FileNotFoundException {
+	public void regroup(int groupingCategoryNumber) {
 		if (groupingCategoryNumber < 1 || groupingCategoryNumber > 3) {
 			throw new IndexOutOfBoundsException("grouping category number out of bounds, bounds = [0,3]");
 		} else {
-			clear();
+			this.groupingCategory = groupingCategoryNumber;
+			ArrayList<Node<T, K, O>> listOfNodes = new ArrayList<>();
 
+			Node<T, K, O> mainNode = this.head;
+			Node<T, K, O> subNode = this.head;
+			while (mainNode != null) {
+				listOfNodes.add(mainNode);
+				while(subNode.down != null){
+					subNode = subNode.down;
+					listOfNodes.add(subNode);
+				}
+				mainNode = mainNode.right;
+				subNode = mainNode;
+			}
+			clear();
+			for (int i = 0; i < listOfNodes.size(); i++) {
+				add(listOfNodes.get(i).getCategory1(),listOfNodes.get(i).getCategory2(),listOfNodes.get(i).getCategory3());
+			}
 		}
+
 	}
 
 	/*
