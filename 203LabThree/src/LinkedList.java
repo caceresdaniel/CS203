@@ -79,7 +79,7 @@ public class LinkedList<T, K, O> {
 						currentNode.down = newNode;
 						System.out.println("added to first node downlist");
 					} else {
-						Node<T, K, O> tempCur = currentNode;	
+						Node<T, K, O> tempCur = currentNode;
 						while (tempCur.down != null) {
 							tempCur = tempCur.down;
 						}
@@ -263,9 +263,56 @@ public class LinkedList<T, K, O> {
 	 * Node and should "reconnect" any Nodes that may be attached to the deleted
 	 * Node.
 	 */
-	public void delete(int maindIndex, int subIndex) {
-		// if( mainIndex == 0 && subIndex == 0 )
+	public void delete(int mainIndex, int subIndex) {
+		int countMain = 0, countSub = 0;
+		if (mainIndex > size() - 1 || mainIndex < 0) {
+			throw new IndexOutOfBoundsException("main index out of bounds");
+		} else if (subIndex > size(mainIndex) || subIndex < 0) {
+			throw new IndexOutOfBoundsException("sub index out of bounds");
+		}
 
+		if (mainIndex == 0 && subIndex == 0) {
+			deleteFirst();
+		} else if (mainIndex == size() - 1 && subIndex == 0) {
+			deleteLast();
+		}
+
+		Node<T, K, O> currentNode = this.head;
+		Node<T, K, O> previousNode = this.head;
+		while (currentNode.right != null && countMain < mainIndex) {
+			previousNode = currentNode;
+			currentNode = currentNode.right;
+			countMain++;
+		}
+
+		while (currentNode.down != null && countSub < subIndex) {
+			previousNode = currentNode;
+			currentNode = currentNode.down;
+			countSub++;
+		}
+
+		Node<T, K, O> rightReference = currentNode.right;
+		Node<T, K, O> leftReference = currentNode.left;
+
+		if (subIndex == 0) {
+			if (currentNode.down != null) {
+				rightReference.left = currentNode.down;
+				leftReference.right = currentNode.down;
+				currentNode.down.right = rightReference;
+				currentNode.down.left = leftReference;
+			} else {
+				rightReference.left = leftReference;
+				leftReference.right = rightReference;
+			}
+			size--;
+		} else if (subIndex > 0) {
+			if (currentNode.down != null) {
+				previousNode.down = currentNode.down;
+			} else {
+				previousNode.down = null;
+			}
+
+		}
 	}
 
 	/*
@@ -280,8 +327,36 @@ public class LinkedList<T, K, O> {
 	 * message indicating whether it was the main index or category value that
 	 * was out of bounds.
 	 */
-	public void get(int mainIndex, int category) {
+	public String get(int mainIndex, int category) {
+		if (mainIndex > size() - 1 || mainIndex < 0) {
+			throw new IndexOutOfBoundsException("mainIndex out of bounds");
+		} else if (category < 0 || category > 3) {
+			throw new IndexOutOfBoundsException("category index out of bounds");
+		}
 
+		int count = 0;
+		Node<T, K, O> currentNode = this.head;
+		if (category == 1) {
+			while (currentNode.right != null && count < mainIndex ) {
+				currentNode = currentNode.right;
+				count++;
+			}
+			return (String) currentNode.getCategory1();
+		} else 	if (category == 2) {
+			while (currentNode.right != null && count < mainIndex) {
+				currentNode = currentNode.right;
+				count++;
+			}
+			return (String) currentNode.getCategory2();
+		}else 	if (category == 3) {
+			while (currentNode.right != null && count < mainIndex) {
+				currentNode = currentNode.right;
+				count++;
+			}
+			return (String) currentNode.getCategory3();
+		}
+
+		return null;
 	}
 
 	/*
@@ -298,8 +373,16 @@ public class LinkedList<T, K, O> {
 	 * with an appropriate error message indicating whether it was the main
 	 * index, sub index or category value that was out of bounds.
 	 */
-	public void get(int mainIndex, int subIndex, int category) {
+	public String get(int mainIndex, int subIndex, int category) {
+		if (mainIndex > size() - 1 || mainIndex < 0) {
+			throw new IndexOutOfBoundsException("main index out of bounds");
+		} else if (category < 0 || category > 3) {
+			throw new IndexOutOfBoundsException("category index out of bounds");
+		} else if (subIndex < 0 | subIndex > size(mainIndex)) {
+			throw new IndexOutOfBoundsException("sub index out of bounds");
+		}
 
+		return null;
 	}
 
 	/*
@@ -343,11 +426,11 @@ public class LinkedList<T, K, O> {
 		int count = 0;
 		int subListSize = 0;
 		if (index > size() - 1 || index < 0) {
-			throw new IndexOutOfBoundsException("Index out of bounds, max index: " + size());
+			throw new IndexOutOfBoundsException("Index out of bounds, index bounds: [0," + size() + "]");
 		} else {
 			if (index == 0) {
-				Node<T,K,O> thisNode = this.head;
-				while(thisNode.down != null){
+				Node<T, K, O> thisNode = this.head;
+				while (thisNode.down != null) {
 					thisNode = thisNode.down;
 					subListSize++;
 				}
@@ -357,18 +440,23 @@ public class LinkedList<T, K, O> {
 					currentNode = currentNode.right;
 					count++;
 				}
+				while (currentNode.down != null) {
+					currentNode = currentNode.down;
+					subListSize++;
+				}
 			}
 		}
-
 		return subListSize;
 	}
 
 	public void print() {
-		System.out.println(this.head.right.getCategory1());
-		System.out.println(this.head.down.getCategory1());
-		System.out.println(this.head.down.down.getCategory1());
-		
-		System.out.println(this.head.right.right.left.down.getCategory2());
+		// System.out.println(this.head.right.getCategory1());
+		// System.out.println(this.head.down.getCategory1());
+		// System.out.println(this.head.down.down.getCategory1());
+		//
+		// System.out.println(this.head.right.right.left.down.getCategory2());
+
+		System.out.println(this.head.right.right.getCategory3());
 	}
 
 	public void print2() {
