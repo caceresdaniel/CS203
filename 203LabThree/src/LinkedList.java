@@ -1,5 +1,6 @@
 import java.io.File;
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class LinkedList<T, K, O> {
 	private Node<T, K, O> head;
@@ -26,9 +27,36 @@ public class LinkedList<T, K, O> {
 	 * This constructor should take the File and create a list based on the
 	 * values in the File.
 	 */
-	public LinkedList(File file, int currentCategory) {
+	@SuppressWarnings("unchecked")
+	public LinkedList(File file, int currentCategory) throws FileNotFoundException {
 		this.groupingCategory = currentCategory;
+		String lineOfData = "";
+		String[] field = { "" };
+		String values = "";
+		String[] singleValues = { "" };
 
+		Scanner fReader = new Scanner(file);
+
+		while (fReader.hasNextLine()) {
+			lineOfData += fReader.nextLine();
+			lineOfData += "  ";
+			field = lineOfData.split("  ");
+		}
+		fReader.close();
+
+		this.category1Label = (T) field[0];
+		this.category2Label = (K) field[1];
+		this.category3Label = (O) field[2];
+
+		for (int HA = 4; HA < field.length; HA++) {
+			values += field[HA];
+			values += ", ";
+			singleValues = values.split(", ");
+		}
+
+		for (int LOL = 0; LOL < singleValues.length; LOL += 3) {
+			add((T) singleValues[LOL], (K) singleValues[LOL + 1], (O) singleValues[LOL + 2]);
+		}
 	}
 
 	/*
@@ -38,7 +66,142 @@ public class LinkedList<T, K, O> {
 	 * maintains the current grouping category of the list.
 	 */
 	public void add(T value1, K value2, O value3) {
+		Node<T, K, O> newNode = new Node<T, K, O>(value1, value2, value3);
+		Node<T, K, O> currentNode = this.head;
+		boolean done = false;
+		if (groupingCategory == 1) {
+			if (this.head == null) {
+				this.head = newNode;
+				System.out.println("made first head");
+			} else {
+				if (currentNode.category1.equals(value1)) {
+					if (currentNode.down == null) {
+						currentNode.down = newNode;
+						System.out.println("added to first node downlist");
+					} else {
+						Node<T, K, O> tempCur = currentNode;	
+						while (tempCur.down != null) {
+							tempCur = tempCur.down;
+						}
+						tempCur.down = newNode;
+						System.out.println("added to first node down list p2");
+					}
+				} else {
+					while (currentNode.right != null) {
+						currentNode = currentNode.right;
+						if (currentNode.category1.equals(value1)) {
+							if (currentNode.down == null) {
+								currentNode.down = newNode;
+								System.out.println("added to middle node downlist");
+								done = true;
+							} else {
+								Node<T, K, O> tempCur = currentNode;
+								while (tempCur.down != null) {
+									tempCur = tempCur.down;
+								}
+								tempCur.down = newNode;
+								System.out.println("added to middle node down list p2");
+								done = true;
+							}
+						}
+					}
+					if (!done) {
+						currentNode.right = newNode;
+						newNode.left = currentNode;
+						System.out.println("created a new node in main list");
+					}
+				}
+			}
+		} else if (groupingCategory == 2) {
+			if (this.head == null) {
+				this.head = newNode;
+				System.out.println("made first head");
+			} else {
+				if (currentNode.category2.equals(value2)) {
+					if (currentNode.down == null) {
+						currentNode.down = newNode;
+						System.out.println("added to first node downlist");
+					} else {
+						Node<T, K, O> tempCur = currentNode;
+						while (tempCur.down != null) {
+							tempCur = tempCur.down;
+						}
+						tempCur.down = newNode;
+						System.out.println("added to first node down list p2");
+					}
+				} else {
+					while (currentNode.right != null) {
+						currentNode = currentNode.right;
+						if (currentNode.category2.equals(value2)) {
+							if (currentNode.down == null) {
+								currentNode.down = newNode;
+								System.out.println("added to middle node downlist");
+								done = true;
+							} else {
+								Node<T, K, O> tempCur = currentNode;
+								while (tempCur.down != null) {
+									tempCur = tempCur.down;
+								}
+								tempCur.down = newNode;
+								System.out.println("added to middle node down list p2");
+								done = true;
+							}
+						}
+					}
+					if (!done) {
+						currentNode.right = newNode;
+						newNode.left = currentNode;
+						System.out.println("created a new node in main list");
+					}
+				}
+			}
+		} else if (groupingCategory == 3) {
+			if (this.head == null) {
+				this.head = newNode;
+				System.out.println("made first head");
+			} else {
+				if (currentNode.category3.equals(value3)) {
+					if (currentNode.down == null) {
+						currentNode.down = newNode;
+						System.out.println("added to first node downlist");
+					} else {
+						Node<T, K, O> tempCur = currentNode;
+						while (tempCur.down != null) {
+							tempCur = tempCur.down;
+						}
+						tempCur.down = newNode;
+						System.out.println("added to first node down list p2");
+					}
+				} else {
+					while (currentNode.right != null) {
+						currentNode = currentNode.right;
 
+						if (currentNode.category3.equals(value3)) {
+							if (currentNode.down == null) {
+								currentNode.down = newNode;
+								System.out.println("added to middle node downlist");
+								done = true;
+							} else {
+								Node<T, K, O> tempCur = currentNode;
+								while (tempCur.down != null) {
+									tempCur = tempCur.down;
+								}
+								tempCur.down = newNode;
+								System.out.println("added to middle node down list p2");
+								done = true;
+							}
+						}
+					}
+					if (!done) {
+						currentNode.right = newNode;
+						newNode.left = currentNode;
+						System.out.println("created a new node in main list");
+					}
+				}
+			}
+		}
+		size++;
+		System.out.println(size);
 	}
 
 	/* This method shall clear the list. */
@@ -101,6 +264,7 @@ public class LinkedList<T, K, O> {
 	 * Node.
 	 */
 	public void delete(int maindIndex, int subIndex) {
+		// if( mainIndex == 0 && subIndex == 0 )
 
 	}
 
@@ -147,8 +311,13 @@ public class LinkedList<T, K, O> {
 	 * bounds, display an IndexOutOfBoundsException with an appropriate error
 	 * message.
 	 */
-	public void regroup(int groupingCategoryNumber) {
+	public void regroup(int groupingCategoryNumber) throws FileNotFoundException {
+		if (groupingCategoryNumber < 1 || groupingCategoryNumber > 3) {
+			throw new IndexOutOfBoundsException("grouping category number out of bounds, bounds = [0,3]");
+		} else {
+			clear();
 
+		}
 	}
 
 	/*
@@ -156,7 +325,13 @@ public class LinkedList<T, K, O> {
 	 * number of nodes in the main list.
 	 */
 	public int size() {
-		return size;
+		Node<T, K, O> currentNode = this.head;
+		int mainListSize = 1;
+		while (currentNode.right != null) {
+			currentNode = currentNode.right;
+			mainListSize++;
+		}
+		return mainListSize;
 	}
 
 	/*
@@ -165,7 +340,40 @@ public class LinkedList<T, K, O> {
 	 * IndexOutOfBoundsException with an appropriate error message.
 	 */
 	public int size(int index) {
-		return size;
+		int count = 0;
+		int subListSize = 0;
+		if (index > size() - 1 || index < 0) {
+			throw new IndexOutOfBoundsException("Index out of bounds, max index: " + size());
+		} else {
+			if (index == 0) {
+				Node<T,K,O> thisNode = this.head;
+				while(thisNode.down != null){
+					thisNode = thisNode.down;
+					subListSize++;
+				}
+			} else {
+				Node<T, K, O> currentNode = this.head;
+				while (currentNode.right != null && count < index) {
+					currentNode = currentNode.right;
+					count++;
+				}
+			}
+		}
+
+		return subListSize;
 	}
 
+	public void print() {
+		System.out.println(this.head.right.getCategory1());
+		System.out.println(this.head.down.getCategory1());
+		System.out.println(this.head.down.down.getCategory1());
+		
+		System.out.println(this.head.right.right.left.down.getCategory2());
+	}
+
+	public void print2() {
+		System.out.println(this.head.getCategory1());
+		System.out.println(this.head.down.getCategory1());
+		System.out.println(this.head.down.down.getCategory1());
+	}
 }

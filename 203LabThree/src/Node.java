@@ -24,4 +24,5 @@ public class Node<T, K, O>{
 	public O getCategory3(){
 		return category3;
 	}
+	
 }
