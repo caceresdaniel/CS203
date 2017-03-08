@@ -1,0 +1,13 @@
+.hBox{
+	-fx-background-color: #000000;
+}
+.gridPane{
+	-fx-pref-height: 1000.0;
+	-fx-pref-width: 900.0;
+	-fx-background-color: #000000;
+}
+.button{
+	-fx-background-color: #000000;
+	-fx-border-color: #ffffff;
+	-fx-text-fill: #ffffff;
+}
