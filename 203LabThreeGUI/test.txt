@@ -10,4 +10,5 @@ Profession
 36, yellow, porn star
 78, orange, basketball player
 25, orange, bitch
-34, brown, work
+34, brown, why
+78, pink, nigga

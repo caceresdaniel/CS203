@@ -11,3 +11,27 @@
 	-fx-border-color: #ffffff;
 	-fx-text-fill: #ffffff;
 }
+.node{
+	-fx-text-fill: #000000;
+	-fx-border-color: blue;
+	-fx-background-color: #ffffff;
+	-fx-pref-height:80;
+	-fx-pref-width: 150;
+	-fx-font-size: 120%;
+	
+}
+.doubleArrow{
+	-fx-background-color: #ffffff;
+	-fx-pref-height:80;
+	-fx-pref-width: 150;
+}
+.singleArrow{
+	-fx-background-color: #ffffff;
+	-fx-pref-height:80;
+	-fx-pref-width: 150;
+}
+.blankSpace{
+	-fx-background-color: #000000;
+	-fx-pref-height:80;
+	-fx-pref-width: 150;
+}

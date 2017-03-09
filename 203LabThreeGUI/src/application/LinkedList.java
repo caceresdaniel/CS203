@@ -378,7 +378,7 @@ public class LinkedList<T, K, O> {
 	 */
 	public String get(int mainIndex, int subIndex, int category) {
 		if (mainIndex > size() - 1 || mainIndex < 0) {
-			throw new IndexOutOfBoundsException("main index out of bounds");
+			throw new IndexOutOfBoundsException("main index out of bounds, index used: " + mainIndex);
 		} else if (category < 0 || category > 3) {
 			throw new IndexOutOfBoundsException("category index out of bounds");
 		} else if (subIndex < 0 | subIndex > size(mainIndex)) {
@@ -502,19 +502,7 @@ public class LinkedList<T, K, O> {
 		return subListSize;
 	}
 
-	public void print() {
-		// System.out.println(this.head.right.getCategory1());
-		// System.out.println(this.head.down.getCategory1());
-		// System.out.println(this.head.down.down.getCategory1());
-		//
-		// System.out.println(this.head.right.right.left.down.getCategory2());
-
-		System.out.println(this.head.right.right.getCategory3());
-	}
-
-	public void print2() {
-		System.out.println(this.head.getCategory1());
-		System.out.println(this.head.down.getCategory1());
-		System.out.println(this.head.down.down.getCategory1());
+	public String toString(int num1, int num2) {
+		return this.category1Label + ": " + get(num1, num2, 1) + "\n" + this.category2Label + ": "+ get(num1, num2, 2) + "\n" + this.category3Label+ ": " + get(num1, num2, 3);
 	}
 }
