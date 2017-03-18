@@ -15,9 +15,18 @@ public class PositionTracker {
 	private int inPosFour;
 	private int inPosFive;
 	private int inPosSix;
+	private int inPosSeven = 1;
 	
 	public PositionTracker(){}
 
+	public int getInPosSeven() {
+		return inPosSeven;
+	}
+	
+	public void setInPosSeven(int inPosSeven) {
+		this.inPosSeven = inPosSeven;
+	}
+	
 	public int getInPosOne() {
 		return inPosOne;
 	}

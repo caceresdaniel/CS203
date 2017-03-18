@@ -2,7 +2,7 @@ package application;
 
 import java.util.ArrayList;
 
-public class Hexagon{
+public class Hexagon {
 
 	private int hexagonLabel;
 	private String sideOne;
@@ -13,22 +13,16 @@ public class Hexagon{
 	private String sideSix;
 	private int sidesConnected = 0;
 	private boolean connected = false;
-	
+	private boolean usedInPosOne = false;
+	private boolean usedInPosTwo = false;
+	private boolean usedInPosThree = false;
+	private boolean usedInPosFour = false;
+	private boolean usedInPosFive = false;
+	private boolean usedInPosSix = false;
+
 	private ArrayList<Integer> usedIn = new ArrayList<Integer>();
 
 	public Hexagon() {
-	}
-
-	public ArrayList<Integer> getUsedIn() {
-		return usedIn;
-	}
-	
-	public void addToList(int num){
-		usedIn.add(num);
-	}
-	
-	public void setUsedIn(ArrayList<Integer> usedIn) {
-		this.usedIn = usedIn;
 	}
 
 	public Hexagon(int hexagonLabelIn, String sideOneIn, String sideTwoIn, String sideThreeIn, String sideFourIn,
@@ -42,19 +36,79 @@ public class Hexagon{
 		sideFive = sideFiveIn;
 		sideSix = sideSixIn;
 	}
-	
+
+	public boolean isUsedInPosOne() {
+		return usedInPosOne;
+	}
+
+	public void setUsedInPosOne(boolean usedInPosOne) {
+		this.usedInPosOne = usedInPosOne;
+	}
+
+	public boolean isUsedInPosTwo() {
+		return usedInPosTwo;
+	}
+
+	public void setUsedInPosTwo(boolean usedInPosTwo) {
+		this.usedInPosTwo = usedInPosTwo;
+	}
+
+	public boolean isUsedInPosThree() {
+		return usedInPosThree;
+	}
+
+	public void setUsedInPosThree(boolean usedInPosThree) {
+		this.usedInPosThree = usedInPosThree;
+	}
+
+	public boolean isUsedInPosFour() {
+		return usedInPosFour;
+	}
+
+	public void setUsedInPosFour(boolean usedInPosFour) {
+		this.usedInPosFour = usedInPosFour;
+	}
+
+	public boolean isUsedInPosFive() {
+		return usedInPosFive;
+	}
+
+	public void setUsedInPosFive(boolean usedInPosFive) {
+		this.usedInPosFive = usedInPosFive;
+	}
+
+	public boolean isUsedInPosSix() {
+		return usedInPosSix;
+	}
+
+	public void setUsedInPosSix(boolean usedInPosSix) {
+		this.usedInPosSix = usedInPosSix;
+	}
+
+	public ArrayList<Integer> getUsedIn() {
+		return usedIn;
+	}
+
+	public void addToList(int num) {
+		usedIn.add(num);
+	}
+
+	public void setUsedIn(ArrayList<Integer> usedIn) {
+		this.usedIn = usedIn;
+	}
+
 	public boolean isConnected() {
 		return connected;
 	}
-	
+
 	public void setConnected(boolean connected) {
 		this.connected = connected;
 	}
-	
+
 	public int getSidesConnected() {
 		return sidesConnected;
 	}
-	
+
 	public void setSidesConnected(int sidesConnected) {
 		this.sidesConnected = sidesConnected;
 	}
