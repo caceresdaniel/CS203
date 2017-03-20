@@ -11,14 +11,7 @@ public class Hexagon {
 	private String sideFour;
 	private String sideFive;
 	private String sideSix;
-	private int sidesConnected = 0;
-	private boolean connected = false;
-	private boolean usedInPosOne = false;
-	private boolean usedInPosTwo = false;
-	private boolean usedInPosThree = false;
-	private boolean usedInPosFour = false;
-	private boolean usedInPosFive = false;
-	private boolean usedInPosSix = false;
+
 
 	private ArrayList<Integer> usedIn = new ArrayList<Integer>();
 
@@ -35,6 +28,14 @@ public class Hexagon {
 		sideFour = sideFourIn;
 		sideFive = sideFiveIn;
 		sideSix = sideSixIn;
+	}
+	
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
 	}
 
 	public boolean isUsedInPosOne() {
@@ -103,14 +104,6 @@ public class Hexagon {
 
 	public void setConnected(boolean connected) {
 		this.connected = connected;
-	}
-
-	public int getSidesConnected() {
-		return sidesConnected;
-	}
-
-	public void setSidesConnected(int sidesConnected) {
-		this.sidesConnected = sidesConnected;
 	}
 
 	public int getHexagonLabel() {

@@ -61,6 +61,7 @@ public class GUI extends Application {
 	Polygon polygon75 = new Polygon();
 	Polygon polygon76 = new Polygon();
 	RecursiveSolver rs = new RecursiveSolver();
+	
 	// Attempted to do it simply but could not figure it out in time
 	// so I resorted to doing it the easiest and ugliest way.... I feel ashamed
 
@@ -86,14 +87,10 @@ public class GUI extends Application {
 
 			triangles.getStyleClass().add("pane");
 			disgustingCode();
-			//colorSetter(RecursiveSolver.hexagons, RecursiveSolver.p);
 			addShapes();
 			grabButton(grabButt);
 			solveButton(solveButt);
 
-			// polygon71.setFill(Color.PINK);
-
-			System.out.println(RecursiveSolver.hexagons.toString());
 			
 			hb.getChildren().addAll(solveButt, grabButt);
 			vb.getChildren().addAll(hb, title, triangles);
@@ -112,9 +109,9 @@ public class GUI extends Application {
 		solveButt.setOnMouseClicked(e -> {
 			rs.insertZero();
 			rs.solver(RecursiveSolver.hexagons);
-			//disgustingCode();
+			
 			colorSetter(RecursiveSolver.hexagons, RecursiveSolver.p);
-			//addShapes();
+			
 		});
 	}
 
@@ -646,7 +643,7 @@ public class GUI extends Application {
 				}
 
 			}
-			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel()) == RecursiveSolver.p.getInPosSeven()) {
+			if ((RecursiveSolver.hexagons.get(i).getHexagonLabel() - 1) == RecursiveSolver.p.getInPosZero()) {
 
 				if (RecursiveSolver.hexagons.get(i).getSideOne().equals(color1)) {
 					polygon11.setFill(purple);

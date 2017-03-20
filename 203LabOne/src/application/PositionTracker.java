@@ -3,30 +3,86 @@ package application;
 public class PositionTracker {
 
 	private boolean allFill = false;
-	private boolean posOne;
-	private boolean posTwo;
-	private boolean posThree;
-	private boolean posFour;
-	private boolean posFive;
-	private boolean posSix;
+	private boolean posOneFilled = false;
+	private boolean posTwoFilled = false;
+	private boolean posThreeFilled = false;
+	private boolean posFourFilled = false;
+	private boolean posFiveFilled = false;
+	private boolean posSixFilled = false;
+	private boolean posZeroFilled = false;
+
 	private int inPosOne;
 	private int inPosTwo;
 	private int inPosThree;
 	private int inPosFour;
 	private int inPosFive;
 	private int inPosSix;
-	private int inPosSeven = 1;
-	
-	public PositionTracker(){}
+	private int inPosZero;
 
-	public int getInPosSeven() {
-		return inPosSeven;
+	public boolean isAllFill() {
+		return allFill;
 	}
-	
-	public void setInPosSeven(int inPosSeven) {
-		this.inPosSeven = inPosSeven;
+
+	public void setAllFill(boolean allFill) {
+		this.allFill = allFill;
 	}
-	
+
+	public boolean isPosOneFilled() {
+		return posOneFilled;
+	}
+
+	public void setPosOneFilled(boolean posOneFilled) {
+		this.posOneFilled = posOneFilled;
+	}
+
+	public boolean isPosTwoFilled() {
+		return posTwoFilled;
+	}
+
+	public void setPosTwoFilled(boolean posTwoFilled) {
+		this.posTwoFilled = posTwoFilled;
+	}
+
+	public boolean isPosThreeFilled() {
+		return posThreeFilled;
+	}
+
+	public void setPosThreeFilled(boolean posThreeFilled) {
+		this.posThreeFilled = posThreeFilled;
+	}
+
+	public boolean isPosFourFilled() {
+		return posFourFilled;
+	}
+
+	public void setPosFourFilled(boolean posFourFilled) {
+		this.posFourFilled = posFourFilled;
+	}
+
+	public boolean isPosFiveFilled() {
+		return posFiveFilled;
+	}
+
+	public void setPosFiveFilled(boolean posFiveFilled) {
+		this.posFiveFilled = posFiveFilled;
+	}
+
+	public boolean isPosSixFilled() {
+		return posSixFilled;
+	}
+
+	public void setPosSixFilled(boolean posSixFilled) {
+		this.posSixFilled = posSixFilled;
+	}
+
+	public boolean isPosZeroFilled() {
+		return posZeroFilled;
+	}
+
+	public void setPosZeroFilled(boolean posZeroFilled) {
+		this.posZeroFilled = posZeroFilled;
+	}
+
 	public int getInPosOne() {
 		return inPosOne;
 	}
@@ -75,60 +131,12 @@ public class PositionTracker {
 		this.inPosSix = inPosSix;
 	}
 
-	
-	public boolean isPosOne() {
-		return posOne;
+	public int getInPosZero() {
+		return inPosZero;
 	}
 
-	public void setPosOne(boolean posOne) {
-		this.posOne = posOne;
+	public void setInPosZero(int inPosZero) {
+		this.inPosZero = inPosZero;
 	}
 
-	public boolean isPosTwo() {
-		return posTwo;
-	}
-
-	public void setPosTwo(boolean posTwo) {
-		this.posTwo = posTwo;
-	}
-
-	public boolean isPosThree() {
-		return posThree;
-	}
-
-	public void setPosThree(boolean posThree) {
-		this.posThree = posThree;
-	}
-
-	public boolean isPosFour() {
-		return posFour;
-	}
-
-	public void setPosFour(boolean posFour) {
-		this.posFour = posFour;
-	}
-
-	public boolean isPosFive() {
-		return posFive;
-	}
-
-	public void setPosFive(boolean posFive) {
-		this.posFive = posFive;
-	}
-
-	public boolean isPosSix() {
-		return posSix;
-	}
-
-	public void setPosSix(boolean posSix) {
-		this.posSix = posSix;
-	}
-
-	public boolean isAllFill() {
-		return allFill;
-	}
-
-	public void setAllFill(boolean allFill) {
-		this.allFill = allFill;
-	}
 }
