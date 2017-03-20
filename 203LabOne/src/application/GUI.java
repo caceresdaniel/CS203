@@ -1,10 +1,14 @@
 package application;
 
+import java.io.IOException;
 import java.util.List;
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -56,13 +60,16 @@ public class GUI extends Application {
 	Polygon polygon74 = new Polygon();
 	Polygon polygon75 = new Polygon();
 	Polygon polygon76 = new Polygon();
-
+	RecursiveSolver rs = new RecursiveSolver();
 	// Attempted to do it simply but could not figure it out in time
 	// so I resorted to doing it the easiest and ugliest way.... I feel ashamed
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			HBox hb = new HBox();
+			Button solveButt = new Button("Solve");
+			Button grabButt = new Button("Grab From File");
 			primaryStage.setTitle("Lab 1");
 			Pane pane = new Pane();
 
@@ -78,15 +85,18 @@ public class GUI extends Application {
 			vb.getStyleClass().add("vbox");
 
 			triangles.getStyleClass().add("pane");
-
 			disgustingCode();
-			colorSetter(RecursiveSolver.hexagons, RecursiveSolver.p);
+			//colorSetter(RecursiveSolver.hexagons, RecursiveSolver.p);
 			addShapes();
+			grabButton(grabButt);
+			solveButton(solveButt);
+
 			// polygon71.setFill(Color.PINK);
 
 			System.out.println(RecursiveSolver.hexagons.toString());
-
-			vb.getChildren().addAll(title, triangles);
+			
+			hb.getChildren().addAll(solveButt, grabButt);
+			vb.getChildren().addAll(hb, title, triangles);
 
 			pane.getChildren().add(vb);
 
@@ -98,6 +108,29 @@ public class GUI extends Application {
 		}
 	}
 
+	public void solveButton(Button solveButt) {
+		solveButt.setOnMouseClicked(e -> {
+			rs.insertZero();
+			rs.solver(RecursiveSolver.hexagons);
+			//disgustingCode();
+			colorSetter(RecursiveSolver.hexagons, RecursiveSolver.p);
+			//addShapes();
+		});
+	}
+
+	public void grabButton(Button grabButt) {
+		grabButt.setOnMouseClicked(e -> {
+			try {
+				rs.grabFromFile();
+			} catch (IOException ex) {
+				System.err.println(ex);
+				System.exit(1);
+			}
+		});
+	}
+
+	
+	
 	public void addShapes() {
 		triangles.getChildren().addAll(polygon11, polygon12, polygon13, polygon14, polygon15, polygon16);
 		triangles.getChildren().addAll(polygon21, polygon22, polygon23, polygon24, polygon25, polygon26);

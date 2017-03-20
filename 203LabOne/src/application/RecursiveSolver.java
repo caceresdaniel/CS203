@@ -39,7 +39,7 @@ public class RecursiveSolver {
 			for (int i = 0; i < hexagons.size(); i++) {
 				System.out.println(hexagons.get(i).toString());
 			}
-			Application.launch(GUI.class);
+			
 			positionPrinter();
 			System.out.println("done");
 		} else {
@@ -224,41 +224,13 @@ public class RecursiveSolver {
 		}
 	}
 
-	/****************************************************************/
-	// Main where the GUI is called for user to do what he/she wants
-	public void monitor() {
-		String[] options = { "Quit", "Solve", "Grab Colors From File" };
-
-		int selection;
-
-		do {
-			selection = JOptionPane.showOptionDialog(null, "What would you like to do?", "Main Menu",
-					JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, null);
-
-			switch (selection) {
-			case 1:
-				insertZero();
-				solver(hexagons);
-				break;
-			case 2:
-				try {
-					grabFromFile();
-				} catch (IOException e) {
-					System.err.println(e);
-					System.exit(1);
-				}
-				break;
-
-			}
-		} while (selection != 0);
-	}
 
 	/**************************************************/
 	// reads from selected file and send the information
 	// to the spaceRemover method where the spaces get
 	// removed and then saves information to the
 	// hexagon object
-	private void grabFromFile() throws IOException {
+	public void grabFromFile() throws IOException {
 		String[] field;
 
 		JFileChooser fc = new JFileChooser();
