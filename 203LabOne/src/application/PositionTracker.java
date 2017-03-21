@@ -19,6 +19,25 @@ public class PositionTracker {
 	private int inPosSix;
 	private int inPosZero;
 
+	
+	public void resetVariables() {
+		this.allFill = false;
+		this.posOneFilled = false;
+		this.posTwoFilled = false;
+		this.posThreeFilled = false;
+		this.posFourFilled = false;
+		this.posFiveFilled = false;
+		this.posSixFilled = false;
+		this.posZeroFilled = false;
+		this.inPosOne = -1;
+		this.inPosTwo = -1;
+		this.inPosThree = -1;
+		this.inPosFour = -1;
+		this.inPosFive = -1;
+		this.inPosSix = -1;
+		this.inPosZero = -1;
+	}
+
 	public boolean isAllFill() {
 		return allFill;
 	}

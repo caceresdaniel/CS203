@@ -111,7 +111,6 @@ public class GUI extends Application {
 			rs.solver(RecursiveSolver.hexagons);
 			
 			colorSetter(RecursiveSolver.hexagons, RecursiveSolver.p);
-			
 		});
 	}
 

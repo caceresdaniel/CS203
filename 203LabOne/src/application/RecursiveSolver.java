@@ -106,6 +106,9 @@ public class RecursiveSolver {
 				System.out.println("no match");
 				solver(hexagons);
 			}
+			else {
+				
+			}
 		} else if (position == 4) {
 			if (hexagons.get(p.getInPosZero()).getSideFour().equals(ch.getSideOne())
 					&& hexagons.get(p.getInPosThree()).getSideFive().equals(ch.getSideTwo())
@@ -121,6 +124,8 @@ public class RecursiveSolver {
 				ch.getUsedIn().add(4);
 				System.out.println("no match");
 				solver(hexagons);
+			} else {
+				
 			}
 		} else if (position == 5) {
 			if (hexagons.get(p.getInPosZero()).getSideFive().equals(ch.getSideTwo())
@@ -137,6 +142,8 @@ public class RecursiveSolver {
 				ch.getUsedIn().add(5);
 				System.out.println("no match");
 				solver(hexagons);
+			} else {
+				
 			}
 		} else if (position == 6) {
 			if (hexagons.get(p.getInPosZero()).getSideSix().equals(ch.getSideThree())
@@ -238,6 +245,11 @@ public class RecursiveSolver {
 	// hexagon object
 	public void grabFromFile() throws IOException {
 		String[] field;
+		
+		if(hexagons.size() > 0){
+			hexagons.clear();
+			reset();
+		}
 
 		JFileChooser fc = new JFileChooser();
 		int val = fc.showOpenDialog(null);
@@ -284,7 +296,18 @@ public class RecursiveSolver {
 			hexagons.get(i).getUsedIn().add(0);
 		}
 	}
-
+	
+	public void reset(){
+		for(int i = 0; i < hexagons.size(); i ++){
+			hexagons.get(i).resetVariables();
+			hexagons.get(i).getUsedIn();
+		}
+		
+		hexagons.clear();
+		p.resetVariables();
+		
+	}
+	
 	public void positionPrinter() {
 		System.out.println(p.getInPosOne());
 		System.out.println(p.getInPosTwo());
